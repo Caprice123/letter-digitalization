@@ -1,0 +1,98 @@
+{% extends 'help_guide/help_guide.html' %}
+
+{% block title %}
+<title>Help Guide (Home) | Letter Digitalization</title>
+{% endblock %}
+
+{% block table_of_content %}
+<p>Contents</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_student') }}">Student Page</a></li>
+    <li><a href="{{ url_for('help_guide_teacher') }}">Teacher Page</a></li>
+    <li><a href="{{ url_for('help_guide_admin') }}">Admin Page</a></li>
+    <li><a href="{{ url_for('help_guide_authors') }}">Authors</a></li>
+    <li><a href="{{ url_for('help_guide_changes') }}">Changes</a></li>
+</ul>
+<p>Next</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_student') }}">Student Page</a></li>
+</ul>
+{% endblock %}
+
+
+{% block introduction %}
+<h1>Letter Digitalization</h1>
+<p>Welcome to the help guide for letter digitalization. This web app can make letter and send it automatically to specific teacher for confirmation.
+    If the record is fully accepted, then the user will be emailed a letter with Dean signature. If the record is rejected, then the user will be updated via email.
+    Every progress in the letter, the user will be updated via email also.
+</p>
+<p>This page contains all help guide for all page in letter digitalization. These are the features that is available in this web application : </p>
+<ul>
+    <li><a href="{{ url_for('help_guide_student') }}">Student Page</a></li>
+    <li><a href="{{ url_for('help_guide_teacher') }}">Teacher Page</a></li>
+    <li><a href="{{ url_for('help_guide_admin') }}">Admin Page</a></li>
+    <li><a href="{{ url_for('help_guide_authors') }}">Authors</a></li>
+    <li><a href="{{ url_for('help_guide_changes') }}">Changes</a></li>
+    
+</ul>
+{% endblock %}
+
+
+{% block content %}
+<section class="help-student" id="help-student">
+    <a href="{{ url_for('help_guide_student') }}"><h2>Student Page</h2></a>
+    <ul>
+        
+        <li><a href="{{ url_for('help_guide_student') + '#create-student-account' }}">Create account</a></li>
+        <li><a href="{{ url_for('help_guide_student') + '#sign-in-student' }}">Sign In</a></li>
+        <li><a href="{{ url_for('help_guide_student') + '#student-dashboard' }}">Student dashboard</a></li>
+        <li><a href="{{ url_for('help_guide_student') + '#change-password' }}">Change password</a></li>
+        <li><a href="{{ url_for('help_guide_student') + '#Add-new-mail' }}">Add new mail</a></li>
+    
+    </ul>
+</section>
+
+<section class="help-teacher" id="help-teacher">
+    <a href="{{ url_for('help_guide_teacher') }}"><h2>Teacher Page</h2></a>
+    <ul>
+        <li><a href="{{ url_for('help_guide_teacher') + '#new-teacher' }}">Accept and reject incoming request</a></li>
+        <li><a href="{{ url_for('help_guide_teacher') + '#all-teacher' }}">See all records</a></li>
+        <li><a href="{{ url_for('help_guide_teacher') + '#accepted-teacher' }}">See accepted mails</a></li>
+        <li><a href="{{ url_for('help_guide_teacher') + '#rejected-teacher' }}">See rejected mails</a></li>
+    </ul>
+</section>
+
+<section class="help-admin" id="help-admin">
+    <a href="{{ url_for('help_guide_admin') }}"><h2>Admin Page</h2></a>
+    <ul>
+        <li><a href="{{ url_for('help_guide_admin') + '#record-admin' }}">See all records</a></li>
+        <li><a href="{{ url_for('help_guide_student') + '#add-student' }}">Add new student</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#edit-student' }}">Edit student account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#delete-student' }}">Delete student account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#add-teacher' }}">Add new teacher</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#edit-teacher' }}">Edit teacher account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#delete-teacher' }}">Delete teacher account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#add-admin' }}">Add new admin</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#edit-admin' }}">Edit admin account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#delete-admin' }}">Delete other admin account</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#add-category' }}">Add new template</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#edit-category' }}">Edit template</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#delete-category' }}">Delete template</a></li>
+        <li><a href="{{ url_for('help_guide_admin') + '#enable-category' }}">Enabling template</a></li>
+    </ul>
+</section>
+
+<section class="help-authors" id="help-authors">
+    <a href="{{ url_for('help_guide_authors') }}"><h2>Authors</h2></a>
+    <ul>
+        <li><a href="{{ url_for('help_guide_authors') + '#v1-0-0' }}">Version 1.0.0</a></li>
+    </ul>
+</section>
+
+<section class="help-changes" id="help-changes">
+    <a href="{{ url_for('help_guide_changes') }}"><h2>Changes</h2></a>
+    <ul>
+        <li><a href="{{ url_for('help_guide_changes') + '#v1-0-0' }}">Version 1.0.0</a></li>
+    </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,1237 @@
+/***********************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.show {
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+input, select, textarea {
+  border: none;
+  outline: none;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.main-container {
+  width: 100%;
+  height: 96.25%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: initial;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.main-container .top-container {
+  position: relative;
+  width: 100%;
+  height: 20%;
+  z-index: 100;
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.main-container .top-container .dropdown {
+  position: absolute;
+  display: inline-block;
+  bottom: 6px;
+  right: 0;
+  width: 20%;
+  height: 20%;
+  /***********************************************************************************/
+}
+
+.main-container .top-container .dropdown .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #525151;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 5vh;
+}
+
+.main-container .top-container .dropdown .user .downarrow {
+  height: 20px;
+}
+
+.main-container .top-container .dropdown .user p {
+  color: #525151;
+  font-size: 1rem;
+  width: 10vw;
+  display: block;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.main-container .top-container .dropdown .user p:hover {
+  color: #6cd108;
+}
+
+.main-container .top-container .dropdown .dropdown-content {
+  display: none;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin-left: 25%;
+}
+
+.main-container .top-container .dropdown .dropdown-content.show {
+  display: block;
+}
+
+.main-container .top-container .dropdown .dropdown-content a {
+  padding: 12px 16px;
+  display: block;
+}
+
+.main-container .top-container .dropdown .dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.main-container .mid-container {
+  background-color: #a9acac;
+  width: 100%;
+  height: 1%;
+}
+
+.main-container .bottom-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  background-color: #f0efef;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.main-container .bottom-container .tab {
+  width: 17%;
+  height: 100%;
+  background: #74a138;
+  background: linear-gradient(180deg, #74a138 0%, #9dd84e 50%, #f5f8a3 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.main-container .bottom-container .tab button, .main-container .bottom-container .tab a {
+  display: block;
+  background-color: transparent;
+  color: white;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 20px;
+}
+
+.main-container .bottom-container .tab button:hover, .main-container .bottom-container .tab a:hover {
+  background-color: #43652f;
+}
+
+.main-container .bottom-container .tab button:active, .main-container .bottom-container .tab a:active {
+  background-color: green;
+}
+
+.main-container .bottom-container .tab button.active, .main-container .bottom-container .tab a.active {
+  background-color: #9deb6f;
+  color: #0e3f0e;
+}
+
+.main-container .bottom-container .tab .dropdown-container {
+  background-color: #4d872c;
+  height: 0;
+  z-index: 500;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.main-container .bottom-container .tab .dropdown-container.active {
+  height: 21.25%;
+}
+
+.main-container .bottom-container .tab .dropdown-container a {
+  border-bottom: none;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.main-container .bottom-container .tab .dropdown-container a:hover {
+  background-color: #43652f;
+}
+
+.main-container .bottom-container .tab .tablinks {
+  border-top: 1px solid white;
+}
+
+.main-container .bottom-container .tabcontent {
+  width: 83%;
+}
+
+.main-container .bottom-container .tabcontent .maintable {
+  width: 90%;
+  height: 75%;
+  overflow: hidden scroll;
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 2.5%;
+  background-color: #f0efef;
+}
+
+.main-container .bottom-container .tabcontent .maintable .head {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.main-container .bottom-container .tabcontent .maintable .head thead {
+  width: 100%;
+  padding: 12px 0;
+  text-align: left;
+  background-color: #979696;
+  color: #312d2d;
+}
+
+.main-container .bottom-container .tabcontent .maintable .head tbody {
+  background-color: #f7f7f7;
+}
+
+.main-container .bottom-container .tabcontent .maintable .head tbody tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.main-container .bottom-container .tabcontent .maintable th, .main-container .bottom-container .tabcontent .maintable td {
+  padding: 15px 40px 15px 15px;
+  word-wrap: break-word;
+}
+
+.main-container .bottom-container .tabcontent .maintable td .response {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.main-container .bottom-container .tabcontent .maintable td .response button {
+  height: 40px;
+  width: 40px;
+  border-radius: 7px;
+  border: none;
+  background-color: #bebbbb;
+  color: black;
+  cursor: pointer;
+}
+
+.main-container .bottom-container .tabcontent .maintable td .response button:hover {
+  background-color: #757575;
+  color: white;
+}
+
+.main-container .bottom-container .tabcontent .maintable td .response button:active {
+  background-color: #242424;
+  color: white;
+}
+
+.main-container .bottom-container .tabcontent .maintable tr.accepted {
+  background-color: #c2d39c !important;
+}
+
+.main-container .bottom-container .tabcontent .maintable tr.accepted:nth-child(even) {
+  background-color: #adc47b !important;
+}
+
+.main-container .bottom-container .tabcontent .maintable tr.rejected {
+  background-color: #dc9784 !important;
+}
+
+.main-container .bottom-container .tabcontent .maintable tr.rejected:nth-child(even) {
+  background-color: #d27960 !important;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.form-popup {
+  width: 35%;
+  height: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #c9c3c3;
+  z-index: 1000;
+  box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  border-radius: 10px;
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.form-popup .form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  overflow-y: auto;
+  margin: 0 auto;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.form-popup .form-container * {
+  flex: none;
+}
+
+.form-popup .form-container h1, .form-popup .form-container .failedsignin .failedcontainer p, .failedsignin .failedcontainer .form-popup .form-container p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+  font-size: 1.25rem;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.form-popup .form-container input[type=text], .form-popup .form-container select {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 10px auto;
+  padding: 15px;
+  border: none;
+  background-color: #f1f1f1;
+}
+
+.form-popup .form-container .container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form-popup .form-container .container li {
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+}
+
+.form-popup .form-container .container li input {
+  margin: auto;
+  width: 10%;
+}
+
+.form-popup .form-container .container li label {
+  text-align: left;
+  width: 75%;
+  margin-left: 5px;
+}
+
+.form-popup .form-container #contentt {
+  width: 70%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+  font-size: 14px;
+}
+
+.form-popup .form-container .switch {
+  display: inline-block;
+  width: 70%;
+  height: 10%;
+  margin: 0 auto;
+  transform: translateY(0px);
+}
+
+.form-popup .form-container .switch p {
+  position: absolute;
+  inset: 0;
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: initial;
+}
+
+.form-popup .form-container .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.form-popup .form-container .switch input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.form-popup .form-container .switch input:checked + .slider::before {
+  left: 65%;
+}
+
+.form-popup .form-container .switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.form-popup .form-container .switch .slider {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translateY(-50%);
+  width: 25%;
+  height: 62.5%;
+  cursor: pointer;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.form-popup .form-container .switch .slider.round {
+  border-radius: 34px;
+}
+
+.form-popup .form-container .switch .slider.round::before {
+  border-radius: 50%;
+}
+
+.form-popup .form-container .switch .slider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  width: 25%;
+  padding-top: 25%;
+  background-color: white;
+  transition: .4s;
+}
+
+.form-popup .form-container .btnsubmit {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  margin: 10px auto 0 auto;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+}
+
+.form-popup .form-container .btnsubmit:hover {
+  background: #446619;
+}
+
+.form-popup .form-container .btnsubmit:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.form-popup .form-container .btncancel {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+  margin: 20px auto 0 auto;
+}
+
+.form-popup .form-container .btncancel:hover {
+  text-decoration: underline;
+  color: #1d1a1a;
+}
+
+.form-popup .form-container .btncancel:active {
+  color: #446619;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.studenteditpopupcontainer,
+.teachereditpopupcontainer,
+.admineditpopupcontainer,
+.categoryeditpopupcontainer {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  z-index: 1000000;
+  display: none;
+  text-align: center;
+  flex-direction: column;
+  background-color: #b8b8b8;
+  margin: auto;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.studenteditpopupcontainer .student,
+.studenteditpopupcontainer .teacher,
+.studenteditpopupcontainer .admin,
+.studenteditpopupcontainer .category,
+.teachereditpopupcontainer .student,
+.teachereditpopupcontainer .teacher,
+.teachereditpopupcontainer .admin,
+.teachereditpopupcontainer .category,
+.admineditpopupcontainer .student,
+.admineditpopupcontainer .teacher,
+.admineditpopupcontainer .admin,
+.admineditpopupcontainer .category,
+.categoryeditpopupcontainer .student,
+.categoryeditpopupcontainer .teacher,
+.categoryeditpopupcontainer .admin,
+.categoryeditpopupcontainer .category {
+  color: black;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: transparent;
+  font-weight: bold;
+}
+
+.studenteditpopupcontainer .student p,
+.studenteditpopupcontainer .teacher p,
+.studenteditpopupcontainer .admin p,
+.studenteditpopupcontainer .category p,
+.teachereditpopupcontainer .student p,
+.teachereditpopupcontainer .teacher p,
+.teachereditpopupcontainer .admin p,
+.teachereditpopupcontainer .category p,
+.admineditpopupcontainer .student p,
+.admineditpopupcontainer .teacher p,
+.admineditpopupcontainer .admin p,
+.admineditpopupcontainer .category p,
+.categoryeditpopupcontainer .student p,
+.categoryeditpopupcontainer .teacher p,
+.categoryeditpopupcontainer .admin p,
+.categoryeditpopupcontainer .category p {
+  font-size: 24px;
+}
+
+.studenteditpopupcontainer .inputeditcontainer,
+.teachereditpopupcontainer .inputeditcontainer,
+.admineditpopupcontainer .inputeditcontainer,
+.categoryeditpopupcontainer .inputeditcontainer {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  overflow: auto;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.studenteditpopupcontainer .inputeditcontainer *,
+.teachereditpopupcontainer .inputeditcontainer *,
+.admineditpopupcontainer .inputeditcontainer *,
+.categoryeditpopupcontainer .inputeditcontainer * {
+  width: 70%;
+  height: 50px;
+  margin: 15px auto;
+  background: linear-gradient(360deg, #d0dbda, #ffffff);
+  box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+  border-radius: 10px;
+  border: none;
+  flex: none;
+}
+
+.studenteditpopupcontainer .inputeditcontainer textarea,
+.teachereditpopupcontainer .inputeditcontainer textarea,
+.admineditpopupcontainer .inputeditcontainer textarea,
+.categoryeditpopupcontainer .inputeditcontainer textarea {
+  height: 75%;
+  font-size: 14px;
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.studenteditpopupcontainer .inputeditcontainer input, .studenteditpopupcontainer .inputeditcontainer select,
+.teachereditpopupcontainer .inputeditcontainer input,
+.teachereditpopupcontainer .inputeditcontainer select,
+.admineditpopupcontainer .inputeditcontainer input,
+.admineditpopupcontainer .inputeditcontainer select,
+.categoryeditpopupcontainer .inputeditcontainer input,
+.categoryeditpopupcontainer .inputeditcontainer select {
+  padding: 10px 0 10px 15px;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch,
+.teachereditpopupcontainer .inputeditcontainer .switch,
+.admineditpopupcontainer .inputeditcontainer .switch,
+.categoryeditpopupcontainer .inputeditcontainer .switch {
+  display: inline-block;
+  width: 70%;
+  height: 10%;
+  margin: 0 auto;
+  transform: translateY(0px);
+  background: transparent;
+  box-shadow: none;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch *,
+.teachereditpopupcontainer .inputeditcontainer .switch *,
+.admineditpopupcontainer .inputeditcontainer .switch *,
+.categoryeditpopupcontainer .inputeditcontainer .switch * {
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch p,
+.teachereditpopupcontainer .inputeditcontainer .switch p,
+.admineditpopupcontainer .inputeditcontainer .switch p,
+.categoryeditpopupcontainer .inputeditcontainer .switch p {
+  position: absolute;
+  inset: 0;
+  width: 75%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: initial;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch input,
+.teachereditpopupcontainer .inputeditcontainer .switch input,
+.admineditpopupcontainer .inputeditcontainer .switch input,
+.categoryeditpopupcontainer .inputeditcontainer .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch input:checked + .slider,
+.teachereditpopupcontainer .inputeditcontainer .switch input:checked + .slider,
+.admineditpopupcontainer .inputeditcontainer .switch input:checked + .slider,
+.categoryeditpopupcontainer .inputeditcontainer .switch input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch input:checked + .slider::before,
+.teachereditpopupcontainer .inputeditcontainer .switch input:checked + .slider::before,
+.admineditpopupcontainer .inputeditcontainer .switch input:checked + .slider::before,
+.categoryeditpopupcontainer .inputeditcontainer .switch input:checked + .slider::before {
+  left: 65%;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch input:focus + .slider,
+.teachereditpopupcontainer .inputeditcontainer .switch input:focus + .slider,
+.admineditpopupcontainer .inputeditcontainer .switch input:focus + .slider,
+.categoryeditpopupcontainer .inputeditcontainer .switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch .slider,
+.teachereditpopupcontainer .inputeditcontainer .switch .slider,
+.admineditpopupcontainer .inputeditcontainer .switch .slider,
+.categoryeditpopupcontainer .inputeditcontainer .switch .slider {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translateY(-50%);
+  width: 25%;
+  height: 75%;
+  cursor: pointer;
+  transition: 0.4s;
+  background-color: #064579;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch .slider.round,
+.teachereditpopupcontainer .inputeditcontainer .switch .slider.round,
+.admineditpopupcontainer .inputeditcontainer .switch .slider.round,
+.categoryeditpopupcontainer .inputeditcontainer .switch .slider.round {
+  border-radius: 34px;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch .slider.round::before,
+.teachereditpopupcontainer .inputeditcontainer .switch .slider.round::before,
+.admineditpopupcontainer .inputeditcontainer .switch .slider.round::before,
+.categoryeditpopupcontainer .inputeditcontainer .switch .slider.round::before {
+  border-radius: 50%;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .switch .slider::before,
+.teachereditpopupcontainer .inputeditcontainer .switch .slider::before,
+.admineditpopupcontainer .inputeditcontainer .switch .slider::before,
+.categoryeditpopupcontainer .inputeditcontainer .switch .slider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  width: 25%;
+  padding-top: 25%;
+  background-color: white;
+  transition: .4s;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .container,
+.teachereditpopupcontainer .inputeditcontainer .container,
+.admineditpopupcontainer .inputeditcontainer .container,
+.categoryeditpopupcontainer .inputeditcontainer .container {
+  background: initial;
+  box-shadow: initial;
+  height: auto;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .container *,
+.teachereditpopupcontainer .inputeditcontainer .container *,
+.admineditpopupcontainer .inputeditcontainer .container *,
+.categoryeditpopupcontainer .inputeditcontainer .container * {
+  background: initial;
+  box-shadow: initial;
+  height: auto;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .container li,
+.teachereditpopupcontainer .inputeditcontainer .container li,
+.admineditpopupcontainer .inputeditcontainer .container li,
+.categoryeditpopupcontainer .inputeditcontainer .container li {
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .container li input,
+.teachereditpopupcontainer .inputeditcontainer .container li input,
+.admineditpopupcontainer .inputeditcontainer .container li input,
+.categoryeditpopupcontainer .inputeditcontainer .container li input {
+  width: 10%;
+  margin: auto;
+}
+
+.studenteditpopupcontainer .inputeditcontainer .container li label,
+.teachereditpopupcontainer .inputeditcontainer .container li label,
+.admineditpopupcontainer .inputeditcontainer .container li label,
+.categoryeditpopupcontainer .inputeditcontainer .container li label {
+  text-align: left;
+  width: 75%;
+  margin: 0 auto 0 5px;
+}
+
+.studenteditpopupcontainer .buttonconfirm,
+.teachereditpopupcontainer .buttonconfirm,
+.admineditpopupcontainer .buttonconfirm,
+.categoryeditpopupcontainer .buttonconfirm {
+  position: absolute;
+  display: flex;
+  bottom: 15px;
+  right: 45px;
+}
+
+.studenteditpopupcontainer .buttonconfirm .confirm,
+.teachereditpopupcontainer .buttonconfirm .confirm,
+.admineditpopupcontainer .buttonconfirm .confirm,
+.categoryeditpopupcontainer .buttonconfirm .confirm {
+  width: 100px;
+  height: 50px;
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  border: none;
+  border-radius: 10px;
+}
+
+.studenteditpopupcontainer .buttonconfirm .confirm p,
+.teachereditpopupcontainer .buttonconfirm .confirm p,
+.admineditpopupcontainer .buttonconfirm .confirm p,
+.categoryeditpopupcontainer .buttonconfirm .confirm p {
+  color: white;
+  font-size: 1rem;
+  margin: auto;
+}
+
+.studenteditpopupcontainer .buttonconfirm .confirm:hover,
+.teachereditpopupcontainer .buttonconfirm .confirm:hover,
+.admineditpopupcontainer .buttonconfirm .confirm:hover,
+.categoryeditpopupcontainer .buttonconfirm .confirm:hover {
+  background: #446619;
+}
+
+.studenteditpopupcontainer .buttonconfirm .confirm:active,
+.teachereditpopupcontainer .buttonconfirm .confirm:active,
+.admineditpopupcontainer .buttonconfirm .confirm:active,
+.categoryeditpopupcontainer .buttonconfirm .confirm:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+}
+
+.studenteditpopupcontainer .buttonback,
+.teachereditpopupcontainer .buttonback,
+.admineditpopupcontainer .buttonback,
+.categoryeditpopupcontainer .buttonback {
+  position: absolute;
+  display: flex;
+  bottom: 15px;
+  left: 45px;
+}
+
+.studenteditpopupcontainer .buttonback .back,
+.teachereditpopupcontainer .buttonback .back,
+.admineditpopupcontainer .buttonback .back,
+.categoryeditpopupcontainer .buttonback .back {
+  width: 100px;
+  height: 50px;
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  border: none;
+  border-radius: 10px;
+}
+
+.studenteditpopupcontainer .buttonback .back p,
+.teachereditpopupcontainer .buttonback .back p,
+.admineditpopupcontainer .buttonback .back p,
+.categoryeditpopupcontainer .buttonback .back p {
+  color: white;
+  font-size: 1rem;
+  margin: auto;
+}
+
+.studenteditpopupcontainer .buttonback .back:hover,
+.teachereditpopupcontainer .buttonback .back:hover,
+.admineditpopupcontainer .buttonback .back:hover,
+.categoryeditpopupcontainer .buttonback .back:hover {
+  background: #446619;
+}
+
+.studenteditpopupcontainer .buttonback .back:active,
+.teachereditpopupcontainer .buttonback .back:active,
+.admineditpopupcontainer .buttonback .back:active,
+.categoryeditpopupcontainer .buttonback .back:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+}
+
+.studenteditpopupcontainer.show,
+.teachereditpopupcontainer.show,
+.admineditpopupcontainer.show,
+.categoryeditpopupcontainer.show {
+  display: flex;
+  box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 42px 1000px rgba(0, 0, 0, 0.5);
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+#ct7 {
+  position: absolute;
+  bottom: 0;
+  left: 17%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.topleft {
+  position: absolute;
+  z-index: -1;
+  left: 1%;
+  top: 0;
+  height: 18%;
+  width: 15%;
+}
+
+.hexagontop {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+}
+
+.hexagonbottom {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+}
+
+.bawahkiri {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.mail {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 12vw;
+}
+
+.bottomleft {
+  position: absolute;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.topright {
+  position: absolute;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.image1, .image2, .tophex, .bothex {
+  position: absolute;
+  z-index: 100;
+  width: 75%;
+  height: 50%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.image2, .tophex, .bothex {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.tophex, .bothex {
+  left: 20%;
+}
+
+.bothex {
+  left: 50%;
+  z-index: 1;
+}
+
+.logo {
+  position: absolute;
+  z-index: 50;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  right: 5%;
+}
+
+.doodlekanan {
+  position: absolute;
+  right: 0;
+  width: 30%;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.addbutton {
+  position: absolute;
+  bottom: 8.75%;
+  right: 2.5%;
+  width: 5%;
+  height: 10%;
+  border-radius: 50%;
+  border: none;
+  background-color: #88c910;
+  font-size: 70px;
+  box-shadow: 0 8px 0 0 rgba(76, 131, 95, 0.2);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.addbutton:active {
+  background-color: #21510b;
+  box-shadow: 0 5px #666;
+  transform: translate(0, 5px);
+}
+
+.addbutton:hover {
+  background-color: #3d891a;
+}
+
+.addbutton .addadmin {
+  width: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.failedsignin {
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #c9c3c3;
+  z-index: 2000;
+  box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border-radius: 10px;
+}
+
+.failedsignin .failedcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.failedsignin .failedcontainer h1, .failedsignin .failedcontainer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.failedsignin .failedcontainer p {
+  font-size: 1rem;
+  padding-top: 5px;
+}
+
+.failedsignin .failedcontainer .test1 {
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  margin: 12px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+}
+
+.failedsignin .failedcontainer .test1:hover {
+  background: #446619;
+}
+
+.failedsignin .failedcontainer .test1:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.failedsignin .failedcontainer .forgotbot {
+  display: flex;
+  padding-top: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #494444;
+  margin: 0 auto;
+  font-size: 8px;
+}
+
+.failedsignin .failedcontainer .forgotbot:hover {
+  color: #5b52e4;
+  text-decoration: underline;
+}
+
+.failedsignin .failedcontainer .failedimage {
+  width: 25%;
+  margin: 0 auto;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.help-guide {
+  position: absolute;
+  bottom: 8.75%;
+  right: 8.75%;
+  width: 5%;
+  height: 10%;
+  border-radius: 50%;
+  border: none;
+  background-color: #88c910;
+  box-shadow: 0 8px 0 0 rgba(76, 131, 95, 0.2);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.help-guide:hover {
+  background-color: #3d891a;
+}
+
+.help-guide a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.help-guide a img {
+  width: 62.5%;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #414042;
+  width: 100vw;
+  height: 3.75%;
+  z-index: 10000;
+  padding: 0 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+footer div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.next-prev {
+  position: absolute;
+  bottom: 3.75%;
+  left: 17%;
+  width: 83%;
+  height: 5%;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+}
+
+.next-prev * {
+  font-size: 1.5rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+/***********************************************************************************/
+/*# sourceMappingURL=admin2.css.map */

@@ -1,0 +1,537 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    }
+
+body {
+    /* background-color: rgb(240, 239, 239); */
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; 
+    height: 100vh;
+    display: flex;
+}
+.topleft{
+    position:absolute;
+    z-index: 1;
+    left: 1%;
+    top: 0;
+    height: 18%;
+    width: 15%;
+    /* background-color: yellow; */
+}
+.middlecontainer > .bottomleft{
+    position:absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    /* background-color: green; */
+}
+
+.topright{
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    /* background-color: red; */
+}
+
+.maincontainer{
+    width: 100%;
+    height: 100%;
+    /* z-index: -1; */
+    /* background-color: rgb(240, 239, 239); */
+    background-color: aqua;
+}
+.maincontainer > .topcontainer {
+    height: 20%;
+    width: 100%;
+    /* top: 0; */
+    position: relative;
+    border-bottom: 10px solid rgb(169, 172, 172);
+    background-color: rgb(255, 255, 255);
+}
+#ct7 {
+    position: absolute;
+    bottom: 0;
+    left: 17%;
+}
+
+.maincontainer > .topcontainer > .dropdowncontainer > .student1 {
+    position: relative;
+    width: 170px;
+    height: 40px;
+    /* transform: translateX(-30%); */
+    right: 10px;
+    bottom: 0;
+    z-index: 5000;
+    color: rgb(82, 81, 81);
+    background-color: transparent;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+}
+.dropdowncontainer > .student1 > p:hover{
+    color: rgb(125, 194, 22);
+}
+.maincontainer > .topcontainer > .dropdowncontainer > .arrowdrop{
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    /* background-color: #4CAF50; */
+    top: 50%;
+    transform: translateY(-50%);
+    /* z-index: 5000; */
+}
+.topcontainer > .dropdowncontainer {
+    position: absolute;
+    justify-content: center;
+    width: 190px;
+    height: 20px;
+    align-items: center;
+    display: flex;
+    bottom: 0;
+    color: rgb(82, 81, 81);
+    font-size: 16px;
+    transform: translateX(-100%);
+    right: 20px;
+    z-index: 5000;
+    font-family: 'Poppins', sans-serif;
+}
+.list {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 100%;
+    /* transform: translateX(-30%); */
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    font-family: 'Poppins', sans-serif;
+    /* overflow: hidden; */
+    z-index: 5000;
+    /* text-decoration: none; */
+}
+.list > a {
+    width: 100%;
+    height: 50px;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    padding-left: 13px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    color: black;
+    /* overflow: hidden; */
+}
+.maincontainer > .middlecontainer {
+    height: 80%;
+    width: 100%;
+    align-items: center;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(240, 239, 239);
+    /* z-index: 5000; */
+    display: flex;
+}
+.maincontainer > .middlecontainer > .containertable {
+    overflow: hidden scroll;
+    width: 75%;
+    height: 90%;
+    margin: auto;
+    /* padding-left: 10px; */
+    /* margin: 25px auto; */
+    border-collapse: collapse;
+    z-index: 2000;
+    /* padding-top: 20px; */
+}
+.maincontainer > .middlecontainer > .containertable > .headtable {
+    width: 100%;
+    /* margin: 25px auto; */
+    /* height: 100%; */
+    border: 2px solid gray;
+    border-collapse: collapse;
+    z-index: 2000;
+}
+.headtable thead tr{
+    
+    background-color: grey;
+    color: rgb(44, 44, 44);
+    text-align: left;
+    font-weight: bold;
+}
+.headtable th,
+.headtable td {
+    padding: 12px 15px;
+}
+.headtable tbody tr {
+    height: 10%;
+    border-bottom: 1px solid gray;
+} 
+.headtable tbody tr.sent{
+    background-color: white;
+}
+.headtable tbody tr.accepted{
+    background-color: rgb(194,211,156);
+}
+.headtable tbody tr.rejected{
+    background-color: rgb(221, 152, 133);
+}
+
+
+.headtable tbody tr.sent:nth-child(even){
+    background-color: hsl(0, 0%, 90%);
+}
+.headtable tbody tr.accepted:nth-child(even){
+    background-color: hsl(79, 38%, 62.5%);
+}
+.headtable tbody tr.rejected:nth-child(even){
+    background-color: hsl(13, 56%, 57.5%);
+}
+
+
+/* 
+.headtable tbody tr:nth-of-type(odd) {
+    background-color: rgb(255, 255, 255);
+}
+.headtable tbody tr:last-of-type {
+    border-bottom: 2px solid gray;
+} */
+.button1 {
+    /* right: 50px; */
+    /* transform: translateX(-30); */
+    position: absolute;
+    z-index: 100;
+    bottom: 20px;
+    right: 50px;
+    /* bottom:0; */
+    background-color: #4bad0a;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 72px;
+}
+.button1:hover{
+    background-color: hsl(98, 37%, 29%); 
+}
+.button1:active{
+    background-color: hsl(98, 76%, 68%); 
+}
+.show {
+    display: block;
+}
+.popup1 {
+    background-color: rgb(228, 228, 228);
+    position: fixed;
+    text-align: center;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 500px;
+    overflow: hidden;
+    height: 500px;
+    font-family: 'Poppins', sans-serif;
+    margin: auto;
+    color: rgb(0, 0, 0);
+    border: 4px solid grey;
+    border-radius: 10px;
+    z-index: 5000;
+    box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    -webkit-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    -moz-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+}
+.containerpopup{
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    display: flex;
+}
+.popup1.show {
+    display: flex;
+    flex: none;
+
+}
+.pop1 > p {
+    padding-top: 40px;
+    padding-bottom: 10px;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+}
+.pop1 {
+    display: flex;
+    height: 90%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.pop1 > button {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+    margin: auto;
+    width: 300px;
+    height: 80px;
+    font-size: 10px;
+    color: white;
+    border: none ;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+}
+.pop1 > button:hover{
+    background: #446619; 
+}
+.pop1 > button:active{
+    background-color: hsl(154, 14%, 20%);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.containerpopup.buttonselected{
+    transform: translateX(-100%);
+}
+.containerpopup > *{
+    flex: none;
+}
+.pop2{
+    width: 100%;
+    height: 100%;
+    background: rgb(228, 228, 228);
+    position: relative;
+}
+.pop2 > .containerpopuppage{
+    height: 100%;
+    background-color: rgb(228, 228, 228);
+}
+
+.pop2 > .containerpopuppage > .back {
+    width: 20%;
+    height: 8%;
+    background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    padding-top: 6px;
+    /* border: 2px solid black; */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.pop2 > .containerpopuppage > .back > .back1 {
+    border: none;
+    margin: auto;
+    top: 0;
+    background-color: transparent;
+}
+.pop2 > .containerpopuppage > .back > .back1 > p {
+    background-color: transparent;
+    margin: auto;
+    top: 0;
+    color: white;
+}
+.back:hover{
+    background: #446619; 
+}
+.back:active{
+    background-color: hsl(154, 14%, 20%);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.pop2 > .containerpopuppage > .submit {
+    width: 20%;
+    height: 8%;
+    background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    padding-top: 6px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+}
+.pop2 > .containerpopuppage > .submit > .submit1 {
+    border: none;
+    margin: auto;
+    display: flex;
+    background-color: transparent;
+    top: 0;
+}
+.pop2 > .containerpopuppage > .submit > .submit1 > p {
+    background-color: transparent;
+    margin: auto;
+    /* display: flex; */
+    top: 0;
+    color: rgb(255, 255, 255);
+}
+.submit:hover{
+    background: #446619; 
+}
+.submit:active{
+    background-color: hsl(154, 14%, 20%);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.pop2 > .containerpopuppage > form {
+    height: 100%;
+    width: 100%;
+    right: 2px;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+.pop2 > .containerpopuppage > form > table {
+    height: 90%;
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+    color: black;
+}
+.pop2 > .containerpopuppage > form > table > tbody > tr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 25%;
+    background-color: transparent;
+}
+.pop2 > .containerpopuppage > form > table > tbody > tr > td {
+    text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.pop2 > .containerpopuppage > form > table > tbody > tr > td > input{
+    text-align: left;
+    width: 100%;
+    height: 90%;
+    background: linear-gradient(360deg, #d0dbda, #ffffff);
+    box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+    border-radius: 10px;
+    border: none;
+}
+.containertanggal {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 90%;
+}
+.containertanggal > .tanggal {
+    border: none;
+    height: 100%;
+    background: linear-gradient(360deg, #d0dbda, #ffffff);
+    box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+    border-radius: 10px;
+}
+.containertanggal > input {
+    border: none;
+    height: 100%;
+    background: linear-gradient(360deg, #d0dbda, #ffffff);
+    box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+    border-radius: 10px;
+}
+.containertanggal > p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.containertranskip {
+    background-color: blueviolet;
+}
+.containerma {
+    background-color: cornflowerblue;
+}
+
+.hidden{
+    display: none;
+}
+.popupsubmitcontainer > .centang {
+    width: 30%;
+    padding-bottom: 50px;
+    /* background-color: hotpink; */
+    /* position: absolute; */
+}
+.popupsubmitcontainer {
+    /* background-color: greenyellow; */
+    background-color: white;
+    position: absolute;
+    z-index: 6000;
+    width: 400px;
+    height: 400px;
+    display: none;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    border: 3px solid grey;
+}
+.popupsubmitcontainer > .sent {
+    /* position: absolute; */
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+.popupsubmitcontainer > .submitted {
+    /* position: absolute; */
+    width: 100%;
+    height: 50px;
+    font-size: 17px;
+    color: grey;
+    font-family: 'Poppins', sans-serif;
+}
+.popupsubmitcontainer > .finish {
+    /* position: absolute; */
+    width: 100%;
+    height: 50px;
+    z-index: 500;
+}
+.popupsubmitcontainer > .finish > .finish1 {
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    width: 60%;
+    height: 40px;
+    background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+    color: white;
+    z-index: 500;
+}
+.finish > .finish1:hover{
+    background: #446619; 
+}
+.finish > .finish1:active{
+    background-color: hsl(154, 14%, 20%);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.popupsubmitcontainer.show {
+    display: flex;
+}

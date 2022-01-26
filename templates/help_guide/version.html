@@ -1,0 +1,30 @@
+{% extends 'help_guide/help_guide.html' %}
+
+{% block title %}
+<title>Help Guide (Version) | Letter Digitalization</title>
+{% endblock %}
+
+{% block table_of_content %}
+<p>Contents</p>
+<ul>
+    <li><a href="#v1-0-0">Version 1.0.0</a></li>
+</ul>
+<p>Prev</p>
+<ul>
+    <li><a href="{{url_for('help_guide_authors')}}">Authors</a></li>
+</ul>
+{% endblock %}
+
+
+{% block introduction %}
+<h1>Changes</h1>
+{% endblock %}
+
+{% block content %}
+<section class="v1-0-0" id="v1-0-0">
+    <h1>Version 1.0.0</h1>
+    <ul>
+        <li>Initial release</li>
+    </ul>
+</section>
+{% endblock %}

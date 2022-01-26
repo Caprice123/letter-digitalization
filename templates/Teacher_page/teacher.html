@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/orang.png') }}">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/teacher2.css') }}">
+  <title>Teacher | Letter Digitalization</title>
+</head>
+<body> 
+
+  
+  {% set help_guide     = url_for('static', filename='images/help-guide.png') %}
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- FLASH MESSAGE -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+      <div class="failedsignin" id="failedsignin">
+        <div class="failedcontainer">
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- FLASH IMAGE -->
+            {% if category == "Success" %}
+            <img src="{{ url_for('static', filename='images/success.png') }}" class="failedimage" alt="imageerror">
+         
+            {% else %}
+            <img src="{{ url_for('static', filename='images/failed.png') }}" class="failedimage" alt="imageerror">
+          
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+          
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- FLASH MESSAGE -->
+            <h1>{{ category }}</h1>
+            <p>{{ message }}.</p>
+
+            {% if category == "Error" %}
+                <p>Please try again.</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- BACK BUTTON FOR FLASH -->
+            <button type="button" class="test1" onclick="closefailed()"> &#60; Back</button>
+            <!----------------------------------------------------------------------------------------------------------->
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <!----------------------------------------------------------------------------------------------------------->
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- HELP GUIDE BUTTON -->
+  <div class="help-guide" style="right: 5%">
+      {% if request.path.split("/")[-1] == "sent" %}
+      <a href="{{ url_for('help_guide_teacher') + '#new-teacher'}}" target="_blank">
+
+      {% elif request.path.split("/")[-1] == "all" %}
+      <a href="{{ url_for('help_guide_teacher') + '#all-teacher'}}" target="_blank">
+
+      {% elif request.path.split("/")[-1] == "accepted" %}
+      <a href="{{ url_for('help_guide_teacher') + '#accepted-teacher'}}" target="_blank">
+
+      {% elif request.path.split("/")[-1] == "rejected" %}
+      <a href="{{ url_for('help_guide_teacher') + '#rejected-teacher'}}" target="_blank">
+
+      {% endif %}
+          <img src="{{ help_guide }}" alt="imageerror">
+      </a>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------->
+
+  <img src="{{ url_for('static', filename='images/logokiriatas.png') }}" class="topleft" alt="imageerror">
+  <img src="{{ url_for('static', filename='images/hexagontop.png') }}" class="hexagontop" alt="imageerror">
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- MAIN CONTAINER -->
+  <div class="main-container">
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- HEADER THAT CONTAINS CLOCK AND USER DROPDOWN -->
+    <div class="top-container">
+
+      <!----------------------------------------------------------------------------------------------------------->
+      <!-- CLOCK -->
+      <span id='ct7'></span>
+      <!----------------------------------------------------------------------------------------------------------->
+      
+      <!----------------------------------------------------------------------------------------------------------->
+      <!-- USER DROPDOWN -->
+      <div class="dropdown">
+        <button  class="user">
+          <p>{{ name }}</p>
+          <img src="{{ url_for('static', filename='images/down-arrow.png') }}" class="downarrow" alt="imageerror">
+        </button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="{{ url_for('teacher_change_password') }}"> Change Password</a>
+          <a href="{{ url_for('logout_page') }}"> Log Out</a>
+          <!-- <a href="#contact"> Contact</a> -->
+        </div>
+      </div>
+      <!----------------------------------------------------------------------------------------------------------->
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+    
+    
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- JUST A LINE THAT SEPERATES HEADER AND MAIN TABLE -->
+    <div class="mid-container"></div>
+    <!----------------------------------------------------------------------------------------------------------->
+
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- MAIN CONTAINER TABLE -->
+    <div class="bottom-container">
+      <img src="{{ url_for('static', filename='images/hexagonbottom.png') }}" class="hexagonbottom" alt="imageerror" style="bottom: 3.75%;">
+
+      <!----------------------------------------------------------------------------------------------------------->
+      <!-- SIDEBAR -->
+      <div class="tab">
+        <img src="{{ url_for('static', filename='images/bawahkiri.png') }}" class="bawahkiri" alt="imageerror">
+        <img src="{{ url_for('static', filename='images/mail.png') }}" class="mail" alt="imageerror">
+        
+        {% if status == "sent" %}
+        <a href="{{ url_for('teacher_page', page=1, status='sent' )}}" class="tablinks active" >New</a>
+        {% else %}
+        <a href="{{ url_for('teacher_page', page=1, status='sent' )}}" class="tablinks" >New</a>
+        {% endif %}
+        {% if status == "all" %}
+        <a href="{{ url_for('teacher_page', page=1, status='all' )}}" class="tablinks active" >All</a>
+        {% else %}
+        <a href="{{ url_for('teacher_page', page=1, status='all' )}}" class="tablinks" >All</a>
+        {% endif %}
+
+        {% if status == "accepted" %}
+        <a href="{{ url_for('teacher_page', page=1, status='accepted' )}}" class="tablinks active" >Accepted</a>
+        {% else %}
+        <a href="{{ url_for('teacher_page', page=1, status='accepted' )}}" class="tablinks" >Accepted</a>
+        {% endif %}
+
+        {% if status == "rejected" %}
+        <a href="{{ url_for('teacher_page', page=1, status='rejected' )}}" class="tablinks active" >Rejected</a>
+        {% else %}
+        <a href="{{ url_for('teacher_page', page=1, status='rejected' )}}" class="tablinks" >Rejected</a>
+        {% endif %}
+
+      </div>
+      <!----------------------------------------------------------------------------------------------------------->
+
+
+      <!----------------------------------------------------------------------------------------------------------->
+      <!-- CONTAINER TABLE -->
+      <div id="London" class="tabcontent">
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- FORM FOR ACCEPT OR REJECT -->
+        <form method="POST" action="{{ url_for('teacher_update_record') }}" style="display: none;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <input type="hidden" name="title" class="title-input">
+          <input type="hidden" name="id" class="id-input">
+          <input type="hidden" name="response" class="response-input">
+          <button type="submit" style="display: none;" class="submit"></button>
+          
+        </form>
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- MAIN TABLE -->
+        <div class="maintable">
+          <table class="head">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Name</th>
+                <th>NIM</th>
+                <th>Sent</th>
+                <th>Response</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        
+      </div>
+      <!----------------------------------------------------------------------------------------------------------->
+      
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- PAGE DIV -->
+    <div class="next-prev">
+      {% set page = request.args.get("page")|int %}
+        <!-- IF THERE IS PAGE IN URL -->
+        {% if page %}
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- BACK TO PAGE 1 -->
+            {% if page - 1 > 0 %}
+                <a href="{{ request.path + '?page=1'}}">&#8249;&#8249;</a>
+            {% else %}
+            <p>&nbsp;</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- PREV PAGE -->
+            {% if records.has_prev %}
+                <a href="{{ request.path + '?page=%d'|format( page - 1) }}">&#8249;</a>
+            {% else %}
+                <p>&nbsp;</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+            
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- TWO PREVIOUS PAGE IF EXISTS -->
+            {% if page >= 0 %}
+                {% if page - 2 > 0 %}
+                <a href="{{ request.path + '?page=%d'|format( page - 2) }}" style="font-size: 0.75rem;">{{page - 2}}</a>
+                {% else %}
+                <p>&nbsp;</p>
+                {% endif %}
+
+                {% if page - 1 > 0 %}
+                <a href="{{ request.path + '?page=%d'|format( page - 1) }}" style="font-size: 1rem;">{{page - 1}}</a>
+                {% else %}
+                <p>&nbsp;</p>
+                {% endif %}
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- CURRENT PAGE -->
+            <p>{{page}}</p>
+            <!----------------------------------------------------------------------------------------------------------->
+
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- TWO NEXT PAGE IF EXISTS -->
+            {% if records.max_page - page >= 0 %}
+                {% if records.max_page - page > 0 %}
+                <a href="{{ request.path + '?page=%d'|format( page + 1) }}" style="font-size: 1rem;">{{page + 1}}</a>
+                {% else %}
+                <p>&nbsp;</p>
+                {% endif %}
+
+                {% if records.max_page - page > 1 %}
+                <a href="{{ request.path + '?page=%d'|format( page + 2) }}" style="font-size: 0.75rem;">{{page + 2}}</a>
+                {% else %}
+                <p>&nbsp;</p>
+                {% endif %}
+
+              {% else %}
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+                
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- NEXT PAGE -->
+            {% if records.has_next %}
+                <a href="{{ request.path + '?page=%d'|format( page + 1) }}">&#8250;</a>
+            {% else %}
+            <p>&nbsp;</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- JUMP TO LAST PAGE -->
+            {% if records.max_page - page > 1 %}
+                <a href="{{ request.path + '?page=%d'|format(records.max_page) }}">&#8250;&#8250;</a>
+            {% else %}
+            <p>&nbsp;</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+
+      <!----------------------------------------------------------------------------------------------------------->
+      <!-- IF NOT EXISTS PAGE IS 1 -->
+      {% else %}
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- BLANK -->
+        <p>&nbsp;</p>
+        <!----------------------------------------------------------------------------------------------------------->
+        
+        
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- CURRENT PAGE -->
+        <p>{{1}}</p>
+        <!----------------------------------------------------------------------------------------------------------->
+        
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- TWO NEXT PAGE IF EXISTS -->
+        {% if records.max_page > 1 %}
+        <a href="{{ request.path + '?page=2' }}" style="font-size: 1rem;">2</a>
+        {% else %}
+        <p>&nbsp;</p>
+        {% endif %}
+
+        {% if records.max_page > 2 %}
+        <a href="{{ request.path + '?page=3' }}" style="font-size: 0.75rem;">3</a>
+        {% else %}
+        <p>&nbsp;</p>
+        {% endif %}
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- NEXT PAGE IF EXISTS -->
+        {% if records.has_next %}
+            <a href="{{ request.path + '?page=2'}}">&#8250;</a>
+        {% else %}
+        <p>&nbsp;</p>
+        {% endif %}
+        <!----------------------------------------------------------------------------------------------------------->
+        
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- JUMP TO LAST PAGE -->
+        {% if records.max_page - 1 > 1 %}
+            <a href="{{ request.path + '?page=%d'|format(records.max_page) }}">&#8250;&#8250;</a>
+        {% else %}
+        <p>&nbsp;</p>
+        {% endif %}
+        <!----------------------------------------------------------------------------------------------------------->
+      {% endif %}
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+        
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- FOOTER -->
+    <footer>
+      <div class="project">
+          <p>Letter Digitalization v1.0</p>
+      </div>
+      <div class="year">
+          <p style="color: #B0DE61;">&copy; 2022 BASE</p>
+      </div>
+  </footer>
+  <!----------------------------------------------------------------------------------------------------------->
+        
+  </div>      
+</div>
+</body>
+
+
+<script>
+  /*************************************************************************************************************/
+  // DATAS FROM SERVER
+  const records = {{ records|tojson }}
+  const teacher = {{ teacher|tojson }}
+  /*************************************************************************************************************/
+  
+  var exports = {}
+</script>
+<script src="{{ url_for('static', filename='js/basic_class.js') }}"></script>
+<script src="{{ url_for('static', filename='js/teacher/all_teacher_class.js') }}"></script>
+<script src="{{ url_for('static', filename='js/teacher/main.js') }}"></script>
+</html>

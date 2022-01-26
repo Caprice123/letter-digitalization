@@ -1,0 +1,64 @@
+{% extends 'help_guide/help_guide.html' %}
+
+{% block title %}
+<title>Help Guide (Admin) | Letter Digitalization</title>
+{% endblock %}
+
+{% block table_of_content %}
+<p>Contents</p>
+<ul>
+    <li><a href="#record-admin">See all records</a></li>
+    <li><a href="#add-student">Add new student</a></li>
+    <li><a href="#edit-student">Edit student account</a></li>
+    <li><a href="#delete-student">Delete student account</a></li>
+    <li><a href="#add-teacher">Add new teacher</a></li>
+    <li><a href="#edit-teacher">Edit teacher account</a></li>
+    <li><a href="#delete-teacher">Delete teacher account</a></li>
+    <li><a href="#add-admin">Add new admin</a></li>
+    <li><a href="#edit-admin">Edit admin account</a></li>
+    <li><a href="#delete-admin">Delete other admin account</a></li>
+    <li><a href="#add-category">Add new template</a></li>
+    <li><a href="#edit-category">Edit template</a></li>
+    <li><a href="#disable-category">Disabling template</a></li>
+    <li><a href="#enable-category">Enabling template</a></li>
+</ul>
+<p>Prev</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_teacher') }}">Teacher Page</a></li>
+</ul>
+<p>Next</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_authors') }}">Authors</a></li>
+</ul>
+{% endblock %}
+
+
+{% block introduction %}
+<h1>Admin Page Letter Digitalization</h1>
+<p>This page contains all feature that admin can do. These are the features that admin can do : </p>
+<ul>
+    <li><a href="#record-admin">See all records</a></li>
+    <li><a href="#add-student">Add new student</a></li>
+    <li><a href="#edit-student">Edit student account</a></li>
+    <li><a href="#delete-student">Delete student account</a></li>
+    <li><a href="#add-teacher">Add new teacher</a></li>
+    <li><a href="#edit-teacher">Edit teacher account</a></li>
+    <li><a href="#delete-teacher">Delete teacher account</a></li>
+    <li><a href="#add-admin">Add new admin</a></li>
+    <li><a href="#edit-admin">Edit admin account</a></li>
+    <li><a href="#delete-admin">Delete other admin account</a></li>
+    <li><a href="#add-category">Add new template</a></li>
+    <li><a href="#edit-category">Edit template</a></li>
+    <li><a href="#disable-category">Disabling template</a></li>
+    <li><a href="#enable-category">Enabling template</a></li>
+</ul>
+{% endblock %}
+
+
+{% block content %}
+{% include 'help_guide/admin_page/admin_record.html' %}
+{% include 'help_guide/admin_page/admin_student.html' %}
+{% include 'help_guide/admin_page/admin_teacher.html' %}
+{% include 'help_guide/admin_page/admin_admin.html' %}
+{% include 'help_guide/admin_page/admin_category.html' %}
+{% endblock %}

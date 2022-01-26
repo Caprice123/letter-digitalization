@@ -1,0 +1,661 @@
+/***********************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.show {
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+input, select, textarea {
+  border: none;
+  outline: none;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.main-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background-color: rgba(245, 222, 179, 0);
+  display: flex;
+  border-radius: 20px;
+  box-shadow: 10px 13px 15px -2px rgba(0, 0, 0, 0.84);
+  overflow: hidden;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.main-container .left-container {
+  width: 30%;
+  height: 100%;
+  background-color: #74a138;
+  background: linear-gradient(180deg, #74a138 0%, #9dd84e 50%, #f5f8a3 100%);
+  position: relative;
+}
+
+.main-container .right-container {
+  width: 70%;
+  height: 100%;
+  background: #dcdcd1;
+  background: linear-gradient(0deg, #dcdcd1 0%, white 50%, #dcdcd1 100%);
+  position: relative;
+}
+
+.main-container .right-container .down {
+  margin-top: 12%;
+  width: 100%;
+  height: 80%;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.main-container .right-container .down .welcome {
+  color: #547c20;
+  z-index: 100;
+}
+
+.main-container .right-container .down .welcome h1, .main-container .right-container .down .welcome .failedsignin .failedcontainer p, .failedsignin .failedcontainer .main-container .right-container .down .welcome p {
+  font-size: 1.5rem;
+}
+
+.main-container .right-container .down .emailaddress,
+.main-container .right-container .down .password {
+  margin: 0 auto;
+  height: 12%;
+  width: 60%;
+  border-radius: 10px;
+  border: none;
+  padding: 0px 30px;
+  z-index: 500;
+  background-color: #e2e5e3;
+  background: linear-gradient(360deg, #d0dbda, #ffffff);
+  box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+}
+
+.main-container .right-container .down .forgot {
+  color: #666565;
+  font-size: 8px;
+  border: none;
+  cursor: pointer;
+  z-index: 500;
+  text-align: center;
+  display: flex;
+  background-color: transparent;
+  margin: 0 auto;
+}
+
+.main-container .right-container .down .forgot:hover {
+  color: #5b52e4;
+  text-decoration: underline;
+}
+
+.main-container .right-container .down .forgot:active {
+  color: #2b2b2e;
+}
+
+.main-container .right-container .down .signin {
+  border: none;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  height: 11%;
+  width: 18%;
+  border-radius: 3px;
+  text-transform: uppercase;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+  cursor: pointer;
+  border-radius: 30px;
+  z-index: 500;
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+}
+
+.main-container .right-container .down .signin:hover {
+  background: #446619;
+}
+
+.main-container .right-container .down .signin:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.main-container .right-container .down .notregister {
+  color: #666565;
+}
+
+.main-container .right-container .down .notregister .signupbutton {
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.main-container .right-container .down .notregister .signupbutton:hover {
+  color: #5b52e4;
+  text-decoration: underline;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0;
+  z-index: 500;
+  overflow: hidden;
+  transition: 0.75s;
+  /***********************************************************************************/
+}
+
+.overlay .overlay-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  /***********************************************************************************/
+}
+
+.overlay .overlay-content .main-signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6000;
+  box-shadow: 10px 13px 15px -2px rgba(0, 0, 0, 0.84);
+  width: 100%;
+  height: 100%;
+  background-color: #74a138;
+  background: linear-gradient(180deg, #74a138 0%, #9dd84e 50%, #f5f8a3 100%);
+  display: flex;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.overlay .overlay-content .main-signup .orangsignup {
+  position: absolute;
+  width: 20%;
+  right: 0;
+  bottom: 0;
+  transform: translate(-20%, -5%);
+  z-index: 1;
+}
+
+.overlay .overlay-content .main-signup .left-signup {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #dcdcd1;
+  background: linear-gradient(0deg, #dcdcd1 0%, white 50%, #dcdcd1 100%);
+  position: relative;
+  /***********************************************************************************/
+}
+
+.overlay .overlay-content .main-signup .left-signup .logo {
+  position: absolute;
+  width: 25%;
+  left: 15px;
+}
+
+.overlay .overlay-content .main-signup .left-signup .bothex {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  transform: translate(-70%, 0);
+}
+
+.overlay .overlay-content .main-signup .left-signup .closebtn {
+  position: absolute;
+  z-index: 1000000;
+  text-decoration: none;
+  cursor: pointer;
+  bottom: 0;
+  transform: translate(40%, -200%);
+}
+
+.overlay .overlay-content .main-signup .left-signup .closebtn p {
+  color: grey;
+}
+
+.overlay .overlay-content .main-signup .left-signup .closebtn p:hover {
+  color: #1d1a1a;
+  text-decoration: underline;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 100000;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 70%;
+  width: 60%;
+  margin: 0 auto;
+  z-index: 20;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle h1, .overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle .failedsignin .failedcontainer p, .failedsignin .failedcontainer .overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle p {
+  color: #547c20;
+  font-size: 1.5rem;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle p {
+  color: #2b2b2e;
+  transform: translateY(-80%);
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle input, .overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle select {
+  margin: 0 auto;
+  height: 10%;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  padding: 0px 20px;
+  z-index: 500;
+  background-color: #e2e5e3;
+  background: linear-gradient(360deg, #d0dbda, #ffffff);
+  box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .signuptitle select {
+  color: rgba(0, 0, 0, 0.625);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .register {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-20%, -80%);
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 16%;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+  z-index: 20;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .register:hover {
+  background: #446619;
+}
+
+.overlay .overlay-content .main-signup .left-signup .signupkiri .register:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translate(-20%, -76%);
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.form-popup {
+  width: 50%;
+  height: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #c9c3c3;
+  z-index: 1000000000000000000000000;
+  box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  border-radius: 10px;
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.form-popup .form-container {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+  /***********************************************************************************/
+}
+
+.form-popup .form-container .forgotform {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.form-popup .form-container h1, .form-popup .form-container .failedsignin .failedcontainer p, .failedsignin .failedcontainer .form-popup .form-container p,
+.form-popup .form-container p,
+.form-popup .form-container input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1.25rem;
+}
+
+.form-popup .form-container p {
+  font-size: 0.75rem;
+}
+
+.form-popup .form-container input {
+  width: 80%;
+  font-size: 1rem;
+  margin: 10px auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-popup .form-container .btnsubmit {
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+}
+
+.form-popup .form-container .btnsubmit:hover {
+  background: #446619;
+}
+
+.form-popup .form-container .btnsubmit:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.form-popup .form-container .btncancel {
+  color: grey;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  margin: 10px auto;
+  display: flex;
+  margin-top: 20px;
+  background-color: transparent;
+}
+
+.form-popup .form-container .btncancel:hover {
+  text-decoration: underline;
+  color: #1d1a1a;
+}
+
+.form-popup .form-container .btncancel:active {
+  color: #446619;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.background {
+  position: absolute;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.failedsignin {
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #c9c3c3;
+  z-index: 2000;
+  box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 42px 500px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border-radius: 10px;
+}
+
+.failedsignin .failedcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.failedsignin .failedcontainer h1, .failedsignin .failedcontainer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.failedsignin .failedcontainer p {
+  font-size: 1rem;
+  padding-top: 5px;
+}
+
+.failedsignin .failedcontainer .test1 {
+  background: linear-gradient(180deg, #74a138 20%, #9dd84e 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  margin: 12px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76, 131, 95, 0.2);
+}
+
+.failedsignin .failedcontainer .test1:hover {
+  background: #446619;
+}
+
+.failedsignin .failedcontainer .test1:active {
+  background-color: #2c3a34;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.failedsignin .failedcontainer .forgotbot {
+  display: flex;
+  padding-top: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #494444;
+  margin: 0 auto;
+  font-size: 8px;
+}
+
+.failedsignin .failedcontainer .forgotbot:hover {
+  color: #5b52e4;
+  text-decoration: underline;
+}
+
+.failedsignin .failedcontainer .failedimage {
+  width: 25%;
+  margin: 0 auto;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.topleft {
+  position: absolute;
+  z-index: -1;
+  left: 1%;
+  top: 0;
+  height: 18%;
+  width: 15%;
+}
+
+.hexagontop {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+}
+
+.hexagonbottom {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+}
+
+.bawahkiri {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.mail {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 12vw;
+}
+
+.bottomleft {
+  position: absolute;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.topright {
+  position: absolute;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.image1, .image2, .tophex, .bothex {
+  position: absolute;
+  z-index: 100;
+  width: 75%;
+  height: 50%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.image2, .tophex, .bothex {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.tophex, .bothex {
+  left: 20%;
+}
+
+.bothex {
+  left: 50%;
+  z-index: 1;
+}
+
+.logo {
+  position: absolute;
+  z-index: 50;
+  width: 30%;
+  height: 30%;
+  top: 0;
+  right: 5%;
+}
+
+.doodlekanan {
+  position: absolute;
+  right: 0;
+  width: 30%;
+}
+
+/***********************************************************************************/
+/*# sourceMappingURL=sign_in2.css.map */

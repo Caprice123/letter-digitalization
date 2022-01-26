@@ -1,0 +1,157 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE SIGN UP WINDOW IN LOGIN PAGE
+/***********************************************************************************/
+
+/***********************************************************************************/
+// SIGN UP CONTIANER
+.overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;
+    z-index: 500;
+    overflow: hidden;
+    transition: 0.75s;
+    .overlay-content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        /***********************************************************************************/
+        // SIGN UP INNNER CONTAINER
+        .main-signup{
+            @include positionCenter;
+            z-index: 6000;
+            box-shadow: 10px 13px 15px -2px rgba(0,0,0,0.84);
+            width : 100%;
+            height : 100%;
+            background-color: rgb(116,161,56);
+            background: linear-gradient(180deg, rgba(116,161,56,1) 0%, rgba(157,216,78,1) 50%, rgba(245,248,163,1) 100%);
+            display: flex;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            /***********************************************************************************/
+            // IMAGE DOODLES
+            .orangsignup{
+                position: absolute;
+                width: 20%;
+                right: 0;
+                bottom: 0;
+                transform: translate(-20%,-5%);
+                z-index: 1;
+            }
+            /***********************************************************************************/
+
+            /***********************************************************************************/
+            // SIGN UP CONTAINER
+            .left-signup{
+                width: 70%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                background: rgb(220,220,209);
+                background: linear-gradient(0deg, rgba(220,220,209,1) 0%, rgba(255,255,255,1) 50%, rgba(220,220,209,1) 100%);      
+                position: relative;
+                .logo{
+                    position: absolute; 
+                    width: 25%;
+                    left: 15px;
+                }
+                .bothex{
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    transform: translate(-70%,0);
+                }
+                .closebtn{
+                    position: absolute;
+                    z-index: 1000000;
+                    text-decoration: none;
+                    cursor: pointer;
+                    bottom: 0;
+                    transform: translate(40%,-200%);
+                    p{
+                        color: grey;
+                        &:hover{
+                            
+                            color: rgb(29, 26, 26);
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                /***********************************************************************************/
+                // SIGN UP FORM
+                .signupkiri{
+                    @include flexbox(space-evenly, column);
+                    height: 100%;
+                    text-align: center;
+                    position: relative;
+                    z-index: 100000;
+                    .signuptitle {
+                        @include flexbox(space-evenly, column);
+                        height: 70%;
+                        width: 60%;
+                        margin: 0 auto;
+                        z-index: 20;
+                        h1{
+                            color: #547c20;
+                            font-size: 1.5rem;
+                        }
+                        p{
+                            color: #2b2b2e;
+                            transform: translateY(-80%);
+                        }
+                        input, select{
+                            margin: 0 auto;
+                            height: 10%;
+                            width: 100%;
+                            border-radius: 10px;
+                            border: none;
+                            padding: 0px 20px;
+                            z-index: 500;
+                            background-color: rgb(226, 229, 227);
+                            background: linear-gradient(360deg, #d0dbda, #ffffff);
+                            box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+                        }
+                        select{
+                            color: rgba(0,0,0,0.625);
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                        }
+                    }
+                    .register{
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        transform: translate(-20%, -80%);
+                        background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+                        color: white;
+                        padding: 12px 0px;
+                        border: none;
+                        cursor: pointer;
+                        width: 16%;
+                        border-radius: 70px;
+                        box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+                        z-index: 20;
+                        &:hover{
+                            background: #446619;
+                        }
+                        &:active{
+                            
+                            background-color: hsl(154, 14%, 20%);
+                            box-shadow: 0 5px #666;
+                            transform: translate(-20%, -76%)
+                        }
+                    }
+                }
+            }
+            /***********************************************************************************/
+        }
+    }
+    /***********************************************************************************/
+    
+}
+/***********************************************************************************/

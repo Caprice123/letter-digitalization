@@ -1,0 +1,111 @@
+<section class="category" id="category">
+    <h1>Category</h1>
+    <p>This subpage of admin page handles all actions that admin can do</p>
+    <section class="add-category" id="add-category">
+        <h3>Add New Template</h3>
+        <p>For adding new template, you need to click an add button located at the corner bottom right as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/add_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking add button, there will be a popup window for the user to add new template as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/popup_window_help_guide.png') }}" alt="imageerror">
+        <p>
+            In this popup, the user must insert new name for the category of the record. <strong>Please make sure the name is not the same.</strong>
+            In this popup window, there is some constraint for adding the new category as shown below.
+            <ul id="constraint-add-category">
+                <li>
+                    <p>
+                        <strong>Category name</strong>: The subject of the letter.
+                        <ul>
+                            <li><p>Please insert character only input, example: "Surat Internship".</p></li>
+                        </ul>
+                    </p>
+                <li>
+                    <p>
+                        <strong>Category content</strong>: The content of the letter starting from the number until before signature.
+                        <ul>
+                            <li><p>If there is number letter, insert the following: {{'{{no}}/______/{{bulan terbit}}/{{year}}'}}. Example: {{'{{no}}/Dean.BASE/{{bulan terbit}}/{{year}}'}}.</p></li>
+                            <li><p>If there is some dynamic data, please convert it into {{'{{___}}'}}. Example: Nama : {{'{{name}}'}}.</p></li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Available role</strong>: The role that is available for updating the record and someone with role who will get email everytime the progress of the record increases.
+                        <ul>
+                            <li><p>Just click whatever role for confirming the record and the role will be moved to accepted by section. <strong>Mind that the role must be in order.</strong></p></li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Accepted By</strong>: The order which will be used for the record until it is accepted.
+                        <ul>
+                            <li><p>Click whenever you feel that the order is incorrect. <strong>Please keep in mind that the order is correct.</strong> Example: </p></li>
+                            <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/accepted_by_help_guide.png') }}" alt="imageerror">
+                            <p>Based on the image above, we can see that the order for the record before it is considered accepted is HOP &rarr; Operational.</p>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>After inserting all forms, just click submit and the category will be saved.</p>
+        <p>If success, there will be a popup that show the success message and the category will be visible to all student for making new record.</p>
+        <p>If error, there will be a popup that show the error message and the category will not be saved.</p>
+        <section class="note" id="note">
+            <p>
+                Note:
+            </p>
+            <p>If there is number of letter, please insert it as following: {{'{{no}}/Dean.BASE/{{bulan terbit}}/{{year}}'}}.
+            <p>If there is some date, please insert it as {{'{{date}} {{month}} {{year}}'}}</p>    
+            <p>If the letter need the name of student, please insert it as {{'{{name}}'}}</p>
+            <p>If the letter need the nim of student, please insert it as {{'{{nim}}'}}</p>
+            <p>If the letter need the major of student, please insert it as {{'{{major}}'}}</p>
+            <p>If the letter need the subject, please insert it as {{'{{subject}}'}}</p>
+        </section>
+    </section>
+    <section class="edit-category" id="edit-category">
+        <h3>Edit Template</h3>
+        <p>For editting template, you need to click an edit button located at response column as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/edit_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking edit button, there will be a popup window for the user to edit template as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/popup_window_edit_help_guide.png') }}" alt="imageerror">
+        <p>
+            In this popup, the user can edit the category of the record. <strong>Please make sure the name is not the same.</strong>
+            In this popup window, the constraint for editting the category is the same as the constraint for <a href="#constraint-add-category">adding new category</a>.
+        </p>
+        <p>If already done editting the category, just click the submit button and the category will be editted.</p>
+        <p>If success, there will be a popup that show the success message and the category will be visible to all student for making new record.</p>
+        <p>If error, there will be a popup that show the error message and the category will not be saved.</p>
+        <section class="note" id="note">
+            <p>
+                Note:
+            </p>
+            <p>If there is number of letter, please insert it as following: {{'{{no}}/Dean.BASE/{{bulan terbit}}/{{year}}'}}.
+            <p>If there is some date, please insert it as {{'{{date}} {{month}} {{year}}'}}</p>    
+            <p>If the letter need the name of student, please insert it as {{'{{name}}'}}</p>
+            <p>If the letter need the nim of student, please insert it as {{'{{nim}}'}}</p>
+            <p>If the letter need the major of student, please insert it as {{'{{major}}'}}</p>
+            <p>If the letter need the subject, please insert it as {{'{{subject}}'}}</p>
+        </section>
+    </section>
+    <section class="disable-category" id="disable-category">
+        <h3>Disabling Template</h3>
+        <p>For deleting the template, you need to click an trash button located at the second button at actions column as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/delete_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking the button, there will be a confirmation alert to confirm the actions. The confirmation alert will be as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/confirmation_delete_button_help_guide.png') }}" alt="imageerror">
+        <p> If yes, then there will be a success popup the category will not be visible to the user or will be deleted and the category of the record will be shown with different color as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/deleted_category_help_guide.png') }}" alt="imageerror">
+        <p>If no, then there will be no actions.</p>
+    </section>
+
+    <section class="enable-category" id="enable-category">
+        <h3>Enabling Template</h3>
+        <p>For enabling the template, you need to click an refresh button located at the second button at actions column as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/enable_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking the button, there will be a confirmation alert to confirm the actions. The confirmation alert will be as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/confirmation_enable_button_help_guide.png') }}" alt="imageerror">
+        <p> If yes, then there will be a success popup the category will be visible again to the user or will be deleted and the category of the record will be shown with different color as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/category/enabled_category_help_guide.png') }}" alt="imageerror">
+        <p>If no, then there will be no actions.</p>
+    </section>
+</section>

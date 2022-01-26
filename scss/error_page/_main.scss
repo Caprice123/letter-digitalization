@@ -1,0 +1,123 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE ERROR PAGE
+/***********************************************************************************/
+
+/***********************************************************************************/
+// TOP CONTAINER THAT CONTAINS LOGO AND ERROR CODE
+.top-container{
+    width: 100%;
+    height: 37.5%;
+    background-color: hsl(0, 0%, 100%); 
+    position: relative;  
+    .logo{
+        position: absolute;
+        top: 0;
+        left: 5%;
+        width: 15%; 
+    }
+    .tophex{
+        @extend .logo;
+        left: 0;
+        width: 62.5%; 
+        transform: translateX(-12.5%);
+    }
+    .bothex{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width:62.5%; 
+    }
+    h1{
+        font-size: 10rem;
+        color: #75A339;
+        letter-spacing: 1rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        text-shadow: 10px -5px 5px hsl(0, 0%, 75%);
+        transition: 0.5s;
+        animation: move_text 1s linear infinite;
+    }
+}
+/***********************************************************************************/
+
+
+/***********************************************************************************/
+// BOTTOM CONTAINER THAT CONTAINS ERROR MESSAGE
+.bot-container{
+    width: 100%;
+    height: 62.5%;
+    background: rgb(149,184,84);
+    background: linear-gradient(180deg, #75A339 25%, #EBF29B);
+    position: relative;
+
+    h1{
+        font-size: 2.5rem;
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        text-transform: uppercase;
+        transform: translate(-50%, 50%);
+    }
+    p{
+        font-size: 1.125rem;
+        color: white;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, 25%);
+        width: 100%;
+        text-align: center;
+        font-weight: bolder;
+        &:nth-child(even){
+            top: 30%;
+        }
+        a{
+            font-size: 1.25rem;
+            color: white;
+            text-decoration: none;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+    .wrap-container{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 62.5%;
+        background-image: url("../images/city.png");
+        background-size: 200% 100%;
+        background-repeat: repeat-x;
+        background-position: 0 100%;
+        animation: move_background_image 30s linear infinite;
+    }
+}
+/***********************************************************************************/
+
+/***********************************************************************************/
+// ANIMATION ERROR CODE
+@keyframes move_text {
+    50%{
+        transform: translate(-50%, 0%);
+    }
+    100%{
+        transform: translate(-50%, 20%);
+    }
+}
+/***********************************************************************************/
+
+/***********************************************************************************/
+// ANIMATION MOVING BACKGROUND CITY
+@keyframes move_background_image {
+    from{
+        background-position: 0 100%;
+    }
+    to{
+        background-position: 200% 100%;
+    }
+}
+/***********************************************************************************/

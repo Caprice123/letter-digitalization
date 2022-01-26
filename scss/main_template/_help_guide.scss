@@ -1,0 +1,28 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE HELP GUIDE BUTTON
+/***********************************************************************************/
+.help-guide{
+    position: absolute;
+    bottom: 8.75%;
+    right: 8.75%;
+    width: 5%;
+    height: 10%;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(136, 201, 16);
+    box-shadow: 0 8px 0 0 rgba(76,131,95,0.2);
+    z-index: 1000;
+    cursor: pointer;
+    &:hover{
+        background-color: hsl(101, 68%, 32%);
+    }
+    a{
+        height: 100%;
+        width: 100%;
+        @include centerThings;
+        img{
+            width: 62.5%;
+        }
+    }
+    
+}

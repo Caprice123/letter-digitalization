@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/orang.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sign_in2.css') }}">
+  <title>SignIn | Letter Digitalization</title>
+</head>
+<body>
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- IMAGE PATH -->
+  {% set bgimage            = url_for('static', filename='images/webdesign.png') %}
+  {% set bottom_left_image  = url_for('static', filename='images/bottomleft.png') %}
+  {% set top_right_image    = url_for('static', filename='images/topright.png') %}
+  {% set orang              = url_for('static', filename='images/orang.png') %}
+  {% set doodle             = url_for('static', filename='images/doodle.png') %}
+  {% set tophex             = url_for('static', filename='images/tophex.png') %}
+  {% set bothex             = url_for('static', filename='images/bothex.png') %}
+  {% set logo               = url_for('static', filename='images/logo.png') %}
+  {% set forgot             = url_for('static', filename='images/forgot.png') %}
+  {% set signuporang        = url_for('static', filename='images/signuporang.png') %}
+  {% set logokiriatas       = url_for('static', filename='images/logokiriatas.png') %}
+  <!----------------------------------------------------------------------------------------------------------->
+  
+
+  <img src="{{ bgimage }}" class="background" alt="imageerror">
+  <img src="{{ bottom_left_image }}" class="bottomleft" alt="imageerror">
+  <img src="{{ top_right_image }}" class="topright" alt="imageerror">
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- FLASH MESSAGE -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+      <div class="failedsignin" id="failedsignin">
+        <div class="failedcontainer">
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- FLASH IMAGE -->
+            {% if category == "Success" %}
+            <img src="{{ url_for('static', filename='images/success.png') }}" class="failedimage" alt="imageerror">
+         
+            {% else %}
+            <img src="{{ url_for('static', filename='images/failed.png') }}" class="failedimage" alt="imageerror">
+          
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+  
+          
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- FLASH MESSAGE -->
+            <h1>{{ category }}</h1>
+            <p>{{ message }}.</p>
+            {% if category == "Error" %}
+                <p>Please try again.</p>
+            {% endif %}
+            <!----------------------------------------------------------------------------------------------------------->
+  
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- BACK BUTTON FOR FLASH -->
+            <button type="button" class="test1" onclick="closeall()"> &#60; Back</button>
+            <!----------------------------------------------------------------------------------------------------------->
+  
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <!----------------------------------------------------------------------------------------------------------->
+  
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- MAIN CONTAINER -->
+  <div class="main-container">
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- IMAGE DOODLES -->
+    <div class="left-container">
+      <img src="{{ orang }}" class="image1" alt="imageerror">
+      <img src="{{ doodle }}" class="image2" alt="imageerror">     
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+  
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- FORM FOR LOGIN -->
+    <div class="right-container">
+      <img src="{{ tophex }}" class="tophex" alt="imageerror">
+      <img src="{{ bothex }}" class="bothex" alt="imageerror">
+      <img src="{{ logo }}" class="logo" alt="imageerror">
+      
+      <form method="POST" action="{{ url_for('login_page') }}" class="down">
+        <div class="welcome">
+          <h1>WELCOME!</h1>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="text" name="email" class="emailaddress" placeholder="Email Address" required>
+        <input type="password" name="password" class="password" placeholder="Password" required>
+        <div class="forgot" onclick="openforgot()"><h1>Forgot your password?</h1></div>
+        <button class="signin"><p> sign in </p></button>
+        <p><div class ="notregister"> Not register yet? <span class="signupbutton" onclick="openNav()">Create an account</span></div></p>
+      </form>
+    </div>
+  <!----------------------------------------------------------------------------------------------------------->
+  
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- FORGOT PASSWORD POPUP WINDOW -->
+  <div class="form-popup" id="myForm" style="display: none;">
+    <form method="POST" action="{{ url_for('forgot_password') }}" class="form-container">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <img src="{{ forgot }}" class="forgotform" alt="imageerror" loading="lazy">
+      <h1>Forgot Password</h1>
+      <p>Enter you email and we'll send you a link to reset your password</p>
+      <input type="text" placeholder="Enter Email" name="restoration-email" class="restoration-email" required>
+      <button type="submit" class="btnsubmit">Send</button>
+      <button type="button" class="btncancel" onclick="closeForm()"> &#60; Back to Sign In</button>
+    </form>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------->
+  
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!-- SIGN UP WINDOW -->
+  <div id="myNav" class="overlay">
+    <img src="{{ bottom_left_image }}" class="bottomleft" alt="imageerror" loading="lazy">
+    <img src="{{ top_right_image }}" class="topright" alt="imageerror" loading="lazy">
+    
+    <div class="overlay-content">
+      <div class="main-signup">
+        <img src="{{ signuporang }}" class="orangsignup" alt="imageerror" loading="lazy">
+        <img src="{{ doodle }}" class="doodlekanan" alt="imageerror" loading="lazy">     
+        
+        <div class="left-signup">
+          <img src="{{ bothex }}" class="bothex" alt="imageerror" loading="lazy">
+          <img src="{{ logokiriatas }}" class="logo" alt="imageerror" loading="lazy">
+          <div class="closebtn" onclick="closeNav()"><p>&#60; Back to Sign In</p></div>
+          <div class="signupkiri">
+            <form method="POST" action="{{ url_for ('signUp') }}" class="signuptitle">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <h1>SIGN UP</h1>
+              <p>Please fill in this form to create an account!</p>
+              <input type="text" name="name"class="new-name" placeholder="Name" required>
+              <input type="text" name="nim" class="new-nim" placeholder="NIM" required>
+              <select name='jurusan' class="new-jurusan">
+                <option value="Major">Major</option>
+                {% for jurusan in available_jurusan %}
+                <option value="{{jurusan}}">{{jurusan}}</option>
+                {% endfor %}
+                
+              </select>
+
+              <input type="text" name="email" class="new-email" placeholder="Email Address" required>
+              <input type="password" name="password" class="new-password" placeholder="Password" required>
+              <input type="password" name="confirmation-password" class="confirmation-password" placeholder="Confirm Password" required>
+              
+              <button type="submit" class="register">REGISTER</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------------------------------------------------------------------------------------->
+  
+</body>
+<script>
+  var exports = {}
+</script>
+<script src="{{ url_for('static', filename='js/basic_class.js') }}"></script>
+<script src="{{ url_for('static', filename='js/login/all_login_class.js') }}"></script>
+<script src="{{ url_for('static', filename='js/login/login.js') }}"></script>
+</html>

@@ -1,0 +1,89 @@
+<section class="student" id="student">
+    <h1>Student</h1>
+    <p>This subpage of admin page handles all actions that admin can do with the all student account.</p>
+    <section class="add-student" id="add-student">
+        <h3>Add New Student</h3>
+        <p>For adding new student, you need to click an add button located at the corner bottom right as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/add_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking add button, there will be a popup window for the user to add new student account as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/popup_window_help_guide.png') }}" alt="imageerror">
+        <p>
+            In this popup window, there is some constraint for adding new student as shown below.
+            <ul id="constraint-add-student">
+                <li>
+                    <p>
+                        <strong>Name</strong> : The name of the student.
+                        <ul>
+                            <li><p>Please insert character only input, example: "Raymond".</p></li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>NIM</strong> : The NIM of the student
+                        <ul>
+                            <li><p>Please insert integer only input, example: "2301919574".</p></li>
+                        </ul>
+                    </p>
+                </li>
+                
+                <li>
+                    <p>
+                        <strong>Major</strong> : The major of the student 
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Email</strong> : The binus email of the student
+                        <ul>
+                            <li><p>Please insert character only input, example: "endra@binus.ac.id".</p></li>
+                            <li><p>Please insert email with extension of @binus.ac.id, example: "endra@binus.ac.id".</p></li>
+                            <li><p>Please insert a unique email</p></li>
+                        </ul>
+                    </p>
+                </li>        
+            </ul>
+        </p>
+        <p>After inserting forms, just click submit.
+        <p>If success, there will be a popup that show the success message and the student account is ready to be used.</p>
+        <p>If error, there will be a popup that show the error message and the student account is not created.</p>
+        <section class="note" id="note">
+            <p>
+                Note:
+            </p>
+            <p>When a new student account is created, the password of the account it the lowercase of the first name before space plus 123.
+                <br> Example: Name: Raymond W. Password: raymond123</p>
+        </section>
+    </section>
+
+    <section class="edit-student" id="edit-student">
+        <h3>Edit Student</h3>
+        <p>For editing student, you need to click an edit button located at the left button of the actions column as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/edit_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking edit button, there will be a popup window for the user to edit student account as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/popup_window_edit_help_guide.png') }}" alt="imageerror">
+        <p>
+            In this popup, the user can edit the student account.
+            In this popup window, the constraint for editting the student account is the same as the constraint for <a href="#constraint-add-student">adding new student account</a>.
+        </p>
+        <p>If already done editting the student account, just click the submit button.</p>
+        <p>If success, there will be a popup that show the success message and the student account will be editted.
+        <p>If error, there will be a popup that show the error message and the student account will not be editted.</p>
+        <section class="note" id="note">
+            <p>
+                Note:
+            </p>
+            <p>When a student account is successfully editted, the password of the account will stay the same.
+        </section>
+    </section>
+
+    <section class="delete-student" id="delete-student">
+        <h3>Delete student</h3>
+        <p>For deleting student, you need to click an trash button located at the right button of the actions column as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/delete_button_help_guide.png') }}" alt="imageerror">
+        <p>After clicking delete button, there will be confirmation alert to confirm the actions. The confirmation alert will be as shown below.</p>
+        <img loading="lazy" src="{{ url_for('static', filename='images/help_guide/admin_student/confirmation_delete_button_help_guide.png') }}" alt="imageerror">
+        <p>If yes, then there will be a success popup the student account will be deleted.</p>
+        <p>If no, then there will be no actions.</p>
+    </section>
+</section>

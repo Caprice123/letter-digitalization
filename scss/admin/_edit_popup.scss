@@ -1,0 +1,249 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE EDIT POPUP WINDOW FOR EVERY SUBPAGE IN ADMIN PAGE
+/***********************************************************************************/
+
+/***********************************************************************************/
+// MAIN CONTAINER
+.studenteditpopupcontainer, 
+.teachereditpopupcontainer,
+.admineditpopupcontainer,
+.categoryeditpopupcontainer{
+    width: 500px;
+    height: 500px;
+    @include positionCenter;
+    display: flex;
+    z-index: 1000000;
+    
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    background-color: #b8b8b8;
+    margin: auto;
+    /***********************************************************************************/
+    // FORM TITLE
+    .student, 
+    .teacher, 
+    .admin, 
+    .category{
+        color: black;
+        margin: 0 auto;
+        @include flexbox(center, row);
+        @include positionAbsolute(5%, 50%);
+        text-align: center;
+        background-color: transparent;
+        font-weight: bold;
+        p{
+            font-size: 24px;
+        }
+    }
+    /***********************************************************************************/
+
+    /***********************************************************************************/
+    // FORM CONTAINER
+    .inputeditcontainer{
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        
+        @include centerThingsMargin;
+        overflow: auto;
+        *{
+            width: 70%;
+            height: 50px;
+            margin: 15px auto;
+            background: linear-gradient(360deg, #d0dbda, #ffffff);
+            box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+            border-radius: 10px;
+            border: none;
+            flex: none;
+        }
+        /***********************************************************************************/
+        // STYLE TEXTAREA
+        textarea{
+            height: 75%;
+            font-size: 14px;
+            padding-left: 15px;
+            padding-top: 10px;
+        }
+        /***********************************************************************************/
+        
+        /***********************************************************************************/
+        // STYLE FORM INPUT
+        input, select{
+            padding: 10px 0 10px 15px;
+        }
+        /***********************************************************************************/
+        
+        /***********************************************************************************/
+        // STYLE CAN SEE ALL RECORDS IN ADD TEACHER
+        .switch{
+            display: inline-block;
+            width: 70%;
+            height: 10%;
+            margin: 0 auto;
+            transform: translateY(0px);
+            background: transparent;
+            box-shadow: none;
+           
+            *{
+                background: transparent;
+                box-shadow: none;
+                margin: 0;
+            }
+            p{
+                @include positionZero;
+                width: 75%;
+                height: 100%;
+                @include centerThings;
+                justify-content: initial;
+            }
+            input{
+                opacity: 0;
+                width: 0;
+                height: 0;
+                &:checked + .slider{
+                    background-color: #2196F3;
+                }
+                &:checked + .slider::before{
+                    left: 65%;
+                }
+                &:focus + .slider{
+                    box-shadow: 0 0 1px #2196F3;
+                }
+            }
+            .slider{
+                position: absolute;
+                top: 50%;
+                left: 75%;
+                transform: translateY(-50%);
+                width: 25%;
+                height: 75%;
+                cursor: pointer;
+                transition: 0.4s;
+                background-color: hsl(207, 90%, 25%);
+                &.round{
+                    border-radius: 34px;
+                    &::before{
+                        border-radius: 50%;
+                    }
+                }
+                &::before{
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 10%;
+                    transform: translateY(-50%);
+                    width: 25%;
+                    padding-top: 25%;
+                    background-color: white;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+            }
+        }
+        /***********************************************************************************/
+
+        /***********************************************************************************/
+        // STYLE ACCEPTANCE ORDEr
+        .container{
+            background: initial; 
+            box-shadow: initial; 
+            height: auto;
+            *{
+
+                background: initial; 
+                box-shadow: initial; 
+                height: auto;
+            }
+            li{
+                width: 100%;
+                display: flex;
+                list-style-type: none;
+                input{
+                    width: 10%;
+                    margin: auto
+                }
+                label{
+                    text-align: left;
+                    width: 75%;
+                    margin: 0 auto 0 5px;
+                }
+            }
+        }
+        /***********************************************************************************/
+    }
+    /***********************************************************************************/
+    
+    /***********************************************************************************/
+    // CONFIRM BUTTON
+    .buttonconfirm{
+        position: absolute;
+        display: flex;
+        bottom: 15px;
+        right: 45px;
+        .confirm{
+            width: 100px;
+            height: 50px;
+            background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+            border: none;
+            border-radius: 10px;
+            p{
+                color: white;
+                font-size: 1rem;
+                margin: auto;
+            }
+            &:hover{
+                background: #446619; 
+            }
+            &:active{
+                background-color: hsl(154, 14%, 20%);
+                box-shadow: 0 5px #666;
+            }
+        }
+    }
+    /***********************************************************************************/
+    
+    /***********************************************************************************/
+    // CANCEL BUTTON
+    .buttonback{
+        position: absolute;
+        display: flex;
+        bottom: 15px;
+        left: 45px;
+        .back{
+            width: 100px;
+            height: 50px;
+            background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+            border: none;
+            border-radius: 10px;
+            p{
+                color: white;
+                font-size: 1rem;
+                margin: auto;
+            }
+            &:hover{
+                background: #446619; 
+            }
+            &:active{
+                background-color: hsl(154, 14%, 20%);
+                box-shadow: 0 5px #666;
+            }
+        }
+    }
+    /***********************************************************************************/
+
+    /***********************************************************************************/
+    // OPEN POPUP WINDOW
+    &.show{
+        display: flex;
+        box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+        -webkit-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+        -moz-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    }
+    /***********************************************************************************/
+}
