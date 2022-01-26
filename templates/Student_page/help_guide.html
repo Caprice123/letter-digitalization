@@ -1,0 +1,41 @@
+{% extends 'help_guide/help_guide.html' %}
+
+{% block title %}
+<title>Help Guide (Student) | Letter Digitalization</title>
+{% endblock %}
+
+{% block table_of_content %}
+<p>Contents</p>
+<ul>
+    <li><a href="#create-student-account">Create account</a></li>
+    <li><a href="#student-dashboard">Student dashboard</a></li>
+    <li><a href="#change-password">Change password</a></li>
+    <li><a href="#Add-new-mail">Add new mail</a></li>
+</ul>
+<p>Prev</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_home') }}">Guide Page</a></li>
+</ul>
+<p>Next</p>
+<ul>
+    <li><a href="{{ url_for('help_guide_teacher') }}">Teacher Page</a></li>
+</ul>
+{% endblock %}
+
+
+{% block introduction %}
+<h1>Student Page</h1>
+<p>This page contains all feature that student can do. These are the features that student can do : </p>
+<ul>
+    <li><a href="#create-student-account">Create account</a></li>
+    <li><a href="#student-dashboard">Student dashboard</a></li>
+    <li><a href="#change-password">Change password</a></li>
+    <li><a href="#Add-new-mail">Add new mail</a></li>
+    
+</ul>
+{% endblock %}
+
+
+{% block content %}
+{% include 'help_guide/student_page/student_help_guide.html' %}
+{% endblock %}

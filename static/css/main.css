@@ -1,0 +1,907 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    }
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; 
+    height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+/* -----------------------------------slide button------------------------------------------- */
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  z-index: 30;
+  left: 300px;
+  transform: translateY(20px);
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/* -----------------------------------slide button------------------------------------------- */
+#ct7{
+    position: absolute;
+    bottom: 0;
+    left: 17%;
+    font-family: 'Poppins', sans-serif;
+}
+.topleft{
+    position: absolute;
+    z-index: -1;
+    left :1%;
+    top: 0;
+    height: 18%;
+    width: 15%;
+}
+.hexagontop{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+}
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+.main-container > .top-container {
+    z-index: 1000;
+    width: 100%;
+    height: 20%;
+    position: relative;
+}
+.main-container > .top-container > .dropdown > .user > .downarrow {
+    height: 20px;
+}
+.user {
+    color: rgb(82, 81, 81);
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+  }
+.user > p {
+    color: rgb(82, 81, 81);
+    font-size: 16px;
+    width: 10vw;
+    display: block;
+    align-items: center;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.user > p:hover {
+    color: rgb(108, 209, 8);
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    bottom: 6px;
+    right: 0;
+    z-index: 5000;
+    width: 20%;
+    height: 20%;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 5000;
+    margin-left: 25%;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover {background-color: #ddd;}
+.show {display: block;}
+.main-container > .mid-container {
+    background-color: rgb(169, 172, 172);
+    z-index: 20;
+    width: 100%;
+    height: 1%;
+}
+.main-container > .bottom-container {
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    background-color: rgb(240, 239, 239);
+}
+
+.main-container > .bottom-container >  .hexagonbottom {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    right: 0;
+}
+
+.tab {
+    float: left;
+    width: 17%;
+    height: 100%;
+    background: rgb(116,161,56);
+    background: linear-gradient(180deg, rgba(116,161,56,1) 0%, rgba(157,216,78,1) 50%, rgba(245,248,163,1) 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.main-container > .bottom-container > .tab > .bawahkiri {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.main-container > .bottom-container > .tab > .mail {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 12vw;
+}
+.tab button {
+    display: block;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 20px;
+}
+.tab > .tablinks {
+    border-top:1px solid white;
+}
+
+.tab button:hover {
+    background-color: hsl(98, 37%, 29%);
+}
+  
+.tab button.active {
+    background-color: hsl(98, 76%, 68%);
+    color:rgb(14, 63, 14);
+ }
+
+.tabcontent {
+    width: 83%;
+}
+/* .tabdrop {
+    width: 83%;
+    position: absolute;
+} */
+.main-container > .bottom-container > .tabcontent > .maintable {
+    z-index: 1000;
+    width: 90%;
+    height: 90%;
+    overflow: hidden scroll;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 2.5%;
+}
+.main-container > .bottom-container > .tabcontent > .maintable > .head {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+th, td{
+    padding: 15px 40px 15px 15px;
+    word-wrap: break-word;
+}
+
+td > .response {
+    /* padding-left: 50px; */
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: aqua; */
+}
+
+td > .response > button {
+    height: 40px;
+    width: 40px;
+    border-radius: 7px;
+    border: none;
+    background-color: #bebbbb;
+    color: black;
+    cursor: pointer;
+}
+td > .response > button:hover {
+    background-color: #757575;
+    color: rgb(255, 255, 255);
+}
+td > .response > button:active {
+    background-color: #242424;
+    color: rgb(255, 255, 255);
+}
+.main-container > .bottom-container > .tabcontent > .maintable > .head > thead {
+    width: 100%;
+    padding : 12px 0;
+    text-align: left;
+    background-color: #979696;
+    color: rgb(49, 45, 45);
+}
+.main-container > .bottom-container > .tabcontent > .maintable > .head > tbody {
+    background-color: #f7f7f7;
+}
+.main-container > .bottom-container > .tabcontent > .maintable > .head tr:nth-child(even){
+    background-color: rgb(221, 221, 221);
+}
+.dropdown-btn:active {
+    background-color: green;
+    color: white;
+}
+  
+.dropdown-container {
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: hsl(98, 51%, 35%);
+    z-index: 500;
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.dropdown-container.active{
+      height: 21.25%;   
+}
+.dropdown-container a{
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      justify-content: center;
+      color: rgb(255, 255, 255);
+      height: 40px;
+      padding-top: 10px;
+}
+.dropdown-container > a:hover {
+    background-color: hsl(98, 37%, 29%);
+    color: rgb(255, 255, 255);
+}
+
+body > .addbutton {
+    z-index: 100;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 10%;
+    width: 5%;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(136, 201, 16);
+    color: white;
+    justify-content: center;
+    text-align: center;
+    transform: translate(-30px,-20px);
+    font-size: 70px;
+    box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+}
+
+body > .addbutton > .addadmin{
+    width: 60%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 9px;
+}
+body > .addbutton:hover {
+  background-color: hsl(101, 68%, 32%);
+}
+body > .addbutton:active {
+    background-color: hsl(101, 77%, 18%);
+    box-shadow: 0 5px #666;
+    transform: translate(-30px,-16px);
+  }
+
+  .form-popup {
+    width: 35%;
+    height: 70%;
+    position: absolute;
+    border: 3px solid #c9c3c3;
+    z-index: 1000;
+    box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    -webkit-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    -moz-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+    background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    /* display: none; */
+  }
+
+
+/* ---------------------------------------editpopup-------------------------------------------- */
+/* BAGIAN EDIT FORM */
+.edit-popup {
+  width: 35%;
+  height: 70%;
+  position: absolute;
+  border: 3px solid #c9c3c3;
+  z-index: 1000;
+  box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+  -webkit-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+  -moz-box-shadow: 1px 1px 42px 1000px rgba(0,0,0,0.50);
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  /* display: none; */
+}
+.editcontainer{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 5%;
+}
+.editcontainer > h1 {
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: center;
+font-size: 20px;
+margin-top: 5px;
+margin-bottom: 15px;
+}
+.editscrolldown {
+  /* background-color: #2196F3; */
+  /* margin: 0 auto; */
+  /* width: auto; */
+  height: 43vh;
+  display: block;
+  flex-direction: column;
+  overflow-y: auto;
+  justify-content: center;
+  /* width: 30vw; */
+}
+.editcontainer > .editscrolldown > input[type=text] {
+width: 70%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 10px auto;
+padding: 15px;
+border: none;
+background: #f1f1f1;
+}
+#contenttextareaid {
+width: 70%;
+height: 65%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto;
+padding: 15px;
+border: none;
+background: #f1f1f1;
+font-size: 14px;
+resize: none;
+}
+.editcontainer > .editscrolldown > .editacceptedby {
+width: 70%;
+margin: 0 auto;
+margin-top: 5px;
+display: flex;
+justify-content: space-evenly;
+}
+#arehop, #pdehop {
+margin-top: 3px;
+}
+.editcontainer > p .submitedit {
+background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+color: white;
+padding: 12px 0px;
+border: none;
+cursor: pointer;
+width: 30%;
+justify-content: center;
+margin: 0 auto;
+margin-top: 10px;
+display: flex;
+font-size: 16px;
+border-radius: 70px;
+box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+}
+.editcontainer > p .submitedit:hover {
+background: #446619;
+}
+.editcontainer > p .submitedit:active {
+background-color: hsl(154, 14%, 20%);
+box-shadow: 0 5px #666;
+transform: translateY(4px);
+}
+.editcontainer > p .canceledit {
+background-color: transparent;
+color: grey;
+border: none;
+cursor: pointer;
+justify-content: center;
+margin: 0 auto;
+display: flex;
+margin-top: 20px;
+}
+.editcontainer > p .canceledit:hover {
+text-decoration: underline;
+color: rgb(29, 26, 26);
+}
+.editcontainer > p .submitedit:active {
+color: #446619;
+}
+
+.editscrolldown > .container {
+  /* background-color: #2196F3; */
+  /* list-style-type: none; */
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.editscrolldown > .container > ul {
+  list-style-type: none;
+}
+.editscrolldown > .container > ul > li > label{
+  padding-left: 8px;
+}
+/* #completed-tasks label {
+  text-decoration: line-through;
+  color: #888;
+} */
+/* ---------------------------------------editpopup-------------------------------------------- */
+
+
+
+
+
+  /* BAGIAN STUDENT FORM */
+  /* .form-container{
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      flex-direction: column;
+      text-align: center;
+      margin: 0 auto;
+      width: 100%;
+      margin-top: 5%;
+  }
+  .form-container > h1 {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .form-container input[type=text], .form-container input[type=number], .form-container input[type=password] {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px auto;
+    padding: 15px;
+    border: none;
+    background: #f1f1f1;
+  }  
+  .form-container > .btnsubmit {
+    background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+    color: white;
+    padding: 12px 0px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    font-size: 16px;
+    border-radius: 70px;
+    box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+  }
+  .form-container > .btnsubmit:hover {
+    background: #446619;
+  }
+  .form-container > .btnsubmit:active {
+    background-color: hsl(154, 14%, 20%);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  .form-container > .btncancel {
+    background-color: transparent;
+    color: grey;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 20px;
+  }
+  .form-container > .btncancel:hover {
+    text-decoration: underline;
+    color: rgb(29, 26, 26);
+  }
+  .form-container > .btnsubmit:active {
+    color: #446619;
+  } */
+
+
+/* BAGIAN TEACHER FORM */
+  /* .form-container{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 2%;
+}
+.form-container > h1 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.form-container input[type=text], .form-container input[type=password] {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+}
+  #role {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px auto;
+    padding: 15px;
+    border: none;
+    background: #f1f1f1;
+  }
+
+.form-container > .btnsubmit {
+  background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+}
+.form-container > .btnsubmit:hover {
+  background: #446619;
+}
+.form-container > .btnsubmit:active {
+  background-color: hsl(154, 14%, 20%);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.form-container > .btncancel {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 20px;
+}
+.form-container > .btncancel:hover {
+  text-decoration: underline;
+  color: rgb(29, 26, 26);
+}
+.form-container > .btnsubmit:active {
+  color: #446619;
+} */
+
+
+/* BAGIAN ADMIN FORM */
+/* .form-container{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 5%;
+}
+.form-container > h1 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-top: 45px;
+  margin-bottom: 20px;
+}
+.form-container input[type=text], .form-container input[type=password] {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+}
+.form-container > .btnsubmit {
+  background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+}
+.form-container > .btnsubmit:hover {
+  background: #446619;
+}
+.form-container > .btnsubmit:active {
+  background-color: hsl(154, 14%, 20%);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.form-container > .btncancel {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 20px;
+}
+.form-container > .btncancel:hover {
+  text-decoration: underline;
+  color: rgb(29, 26, 26);
+}
+.form-container > .btnsubmit:active {
+  color: #446619;
+} */
+
+/* ---------------------------------------accepted by checkbox-------------------------------------------- */
+/* BAGIAN CATEGORY FORM */
+.form-container{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 5%;
+}
+.form-container > h1 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+.form-container input[type=text] {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+}
+#contentt {
+  width: 70%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 15px;
+  border: none;
+  background: #f1f1f1;
+  font-size: 14px;
+  resize: none;
+}
+.form-container > .lineaccept {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+#hop1, #hop2 {
+  margin-top: 3px;
+}
+.form-container > p .btnsubmit {
+  background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+  color: white;
+  padding: 12px 0px;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  font-size: 16px;
+  border-radius: 70px;
+  box-shadow: 0px 8px 0px 0px rgba(76,131,95,0.2);
+}
+.form-container > p .btnsubmit:hover {
+  background: #446619;
+}
+.form-container > p .btnsubmit:active {
+  background-color: hsl(154, 14%, 20%);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.form-container > p .btncancel {
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 20px;
+}
+.form-container > p .btncancel:hover {
+  text-decoration: underline;
+  color: rgb(29, 26, 26);
+}
+.form-container > p .btnsubmit:active {
+  color: #446619;
+}
+/* ---------------------------------------accepted by checkbox-------------------------------------------- */
+
+
+
+
+
+
+
+/* accepted by */
+/* .form-container >.addaccept {
+  background-color: aqua;
+  width: 70%;
+  display: flex;
+  text-align: left;
+  position: relative;
+  margin: auto;
+  flex: none;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.form-container > .lineaccept {
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form-container > .lineaccept > p {
+  font-size: 14px;
+  padding-top: 3px;
+}
+.form-container >.addaccept > p {
+  left: 0;
+  font-size: 10px;
+  padding-top: 10px;
+}
+.form-container >.addaccept > p > span {
+  position: absolute;
+  right: 0;
+}
+.form-container > .addaccept > .acceptedby {
+  display: flex;
+  background-color: chartreuse;
+  width: 100%;
+}
+.addaccept > .acceptedby > .addinputtext {
+  width: 7vw;
+  height: 5vh;
+  left: 0;
+  padding-left: 10px;
+  font-size: 10px; 
+}
+.addinputtext {
+  font-size: 10px;
+  height: 3px;
+  width: 2px;
+} */
+

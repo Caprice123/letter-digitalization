@@ -1,0 +1,21 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE FOOTER IN EVERY PAGE
+/***********************************************************************************/
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #414042;
+    width: 100vw;
+    height: 3.75%;
+    z-index: 10000;
+    padding: 0 1%;
+    @include flexbox(space-between, row);
+    div{
+        @include centerThings;
+    }
+    p{
+        font-size: 0.9rem;
+        color: #fff;
+    }
+}

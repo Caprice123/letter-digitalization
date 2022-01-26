@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/orang.png') }}">
+  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error_page.css') }}">
+    <title>{{ error_code }} Status Code | Letter Digitalization</title>
+</head>
+<body>
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- TOP CONTAINER OF PAGE CONTAINS ERROR CODE -->
+    <div class="top-container">
+        <img src="{{ url_for('static', filename='images/logokiriatas.png') }}" alt="imageerror" class="logo">
+        <img src="{{ url_for('static', filename='images/tophex.png') }}" alt="imageerror" class="tophex">
+        <img src="{{ url_for('static', filename='images/bothex.png') }}" alt="imageerror" class="bothex">
+        <h1 class="title">{{ error_code }}</h1>
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!-- BOTTOM CONTAINER OF PAGE CONTAINS THE NEW DESTINATION -->
+    <div class="bot-container">
+        <div class="wrap-container"></div>
+        <h1>{{ status_desc }}</h1>
+        <p>Go back, or head over to "<a href="{{ destination_link }}"></a>" to choose a new direction.</p>
+        <p>The page you are looking for doesn't exist or an other error occurred. </p>
+    </div>
+    <!----------------------------------------------------------------------------------------------------------->
+</body>
+<script>
+    const a = document.querySelector("a")
+    var link =  {{ destination_link|tojson }}
+    a.textContent = window.location.host + link
+
+</script>
+</html>

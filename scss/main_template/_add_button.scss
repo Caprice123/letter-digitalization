@@ -1,0 +1,29 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE ADD BUTTON 
+/***********************************************************************************/
+.addbutton{
+    position: absolute;
+    bottom: 8.75%;
+    right: 2.5%;
+    width: 5%;
+    height: 10%;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(136, 201, 16);
+    font-size: 70px;
+    box-shadow: 0 8px 0 0 rgba(76,131,95,0.2);
+    z-index: 1000;
+    cursor: pointer;
+    &:active{
+        background-color: hsl(101, 77%, 18%);
+        box-shadow: 0 5px #666;
+        transform: translate(0, 5px);
+    }
+    &:hover{
+        background-color: hsl(101, 68%, 32%);
+    }
+    .addadmin{
+        width: 60%;
+        @include positionAbsolute(50%, 50%);
+    }
+}

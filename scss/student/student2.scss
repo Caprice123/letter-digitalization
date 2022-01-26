@@ -1,0 +1,26 @@
+/***********************************************************************************/
+// IMPORTING ALL GLOBAL STYLE
+@import "../utils/mixin";
+@import "../utils/reset";
+/***********************************************************************************/
+
+
+/***********************************************************************************/
+// IMPORTING MAIN PAGE STYLE
+@import "./main";
+@import "./add_records";
+@import "./flash_success";
+/***********************************************************************************/
+
+
+/***********************************************************************************/
+// IMPORTING ADDITIONAL STYLE
+@import "../main_template/clock";
+@import "../main_template/add_button";
+@import "../main_template/doodles";
+@import "../main_template/flash";
+@import "../main_template/next-prev";
+@import "../main_template/help_guide";
+@import "../main_template/footer";
+/***********************************************************************************/
+

@@ -1,0 +1,208 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE MAIN TABLE IN STUDENT PAGE
+/***********************************************************************************/
+
+
+/***********************************************************************************/
+// MAIN CONTAINER
+.maincontainer{
+    width: 100%;
+    height: 96.25%;
+
+    
+    /***********************************************************************************/
+    // HEADER THAT CONTAINS THE CLOCK AND USER DROPDOWN
+    .topcontainer{
+        height: 20%;
+        width: 100%;
+        position: relative;
+        border-bottom: 10px solid rgb(169, 172, 172);
+
+        /***********************************************************************************/
+        // USER DROPDOWN
+        .dropdowncontainer{
+            position: absolute;
+            width: 190px;
+            height: 20px;
+            @include centerThings;
+            bottom: 0;
+            color: rgb(82, 81, 81);
+            font-size: 16px;
+            right: 5%;
+            
+            z-index: 10;
+            .student1{
+                position: relative;
+                width: 170px;
+                height: 40px;
+                right: 10px;
+                bottom: 0;
+                z-index: 5000;
+                color: rgb(82, 81, 81);
+                background-color: transparent;
+                cursor: pointer;
+                color: black;
+                font-weight: bold;
+                font-size: 16px;
+                border: none;
+                p{
+                    &:hover{
+                        color: rgb(125, 194, 22);
+                    }
+                }
+                
+                
+            }
+            .arrowdrop{
+                position: absolute;
+                right: 10px;
+                width: 20px;
+                height: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .list{
+                display: none;
+                position: absolute;
+                width: 100%;
+                height: 100px;
+                top: 100%;
+                background-color: #f1f1f1;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                &.show{
+                    display: block;
+                }
+                a{
+                    width: 100%;
+                    height: 50px;
+                    padding-left: 13px;
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    text-decoration: none;
+                    color: black;
+                    &:hover{
+                        background-color: #ddd;
+                    }
+                }
+            }   
+        }
+        /***********************************************************************************/
+    
+    }
+    /***********************************************************************************/
+    // CONTAINER THAT CONTAINS ALL RECORDS
+    .middlecontainer{
+        height: 80%;
+        width: 100%;
+        background-color: rgb(240, 239, 239);
+        display: flex;
+
+        /***********************************************************************************/
+        // ADD RECORD BUTTON
+        .button{
+            position: absolute;
+            bottom: 6.25%;
+            right: 2.5%;
+            z-index: 10;
+            .button1{
+                position: absolute;
+                bottom: 20px;
+                right: 0;
+                background-color: #4bad0a;
+                border: none;
+                border-radius: 50%;
+                color: white;
+                width: 70px;
+                height: 70px;
+                @include centerThings;
+                text-align: center;
+                text-decoration: none;
+                font-size: 72px;
+                box-shadow: 0 8px 0 0 rgba(76,131,95,0.2);
+                cursor: pointer;
+                &:hover{
+                    background-color: hsl(98, 37%, 29%); 
+                }
+                &:active{
+                    background-color: hsl(98, 76%, 68%); 
+                }
+            }
+        }
+        /***********************************************************************************/
+    
+        /***********************************************************************************/
+        // TABLE THAT CONTAINS RECORDS
+        .containertable{
+            overflow: hidden scroll;
+            width: 75%;
+            height: 85%;
+            margin: auto;
+            border-collapse: collapse;
+            .headtable{
+                width: 100%;
+                border: 2px solid gray;
+                border-collapse: collapse;
+                thead{
+                    tr{
+                        background-color: grey;
+                        color: rgb(44, 44, 44);
+                        font-weight: bold;
+                    }
+                   
+                }
+                th, td{
+                    padding: 12px 15px;
+                }
+                tbody{
+                    tr{
+                        height: 10%;
+                        border-bottom: 1px solid gray;
+                        &.sent{
+                            background-color: white;
+                        }
+                        &.sent:nth-child(even){
+                            background-color: hsl(0, 0%, 90%);
+                        }
+                        &.accepted{
+                            background-color: rgb(194,211,156);
+                        }
+                        &.accepted:nth-child(even){
+                            background-color: hsl(79, 38%, 62.5%);
+                        }
+                        &.rejected{
+                            background-color: rgb(221, 152, 133);
+                        }
+                        &.rejected:nth-child(even){
+                            background-color: hsl(13, 56%, 57.5%);
+                        }
+                    }
+                }
+            }
+        }
+        /***********************************************************************************/
+        
+    }
+    /***********************************************************************************/
+        
+}
+/***********************************************************************************/
+        
+
+/***********************************************************************************/
+// IMAGE
+.hexagontop{
+    z-index: 1;
+    width: initial;
+    height: initial;
+}
+.topleft{
+    z-index: 1;
+}
+
+.hexagonbottom{
+    
+    z-index: 1;
+}
+/***********************************************************************************/
+        

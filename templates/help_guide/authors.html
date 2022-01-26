@@ -1,0 +1,47 @@
+{% extends 'help_guide/help_guide.html' %}
+
+{% block title %}
+<title>Help Guide (Authors) | Letter Digitalization</title>
+{% endblock %}
+
+{% block table_of_content %}
+<p>Contents</p>
+<ul>
+    <li><a href="#v1-0-0">Version 1.0.0</a></li>
+</ul>
+<p>Prev</p>
+<ul>
+    <li><a href="{{url_for('help_guide_admin')}}">Admin Page</a></li>
+</ul>
+<p>Next</p>
+<ul>
+    <li><a href="{{url_for('help_guide_changes')}}">Changes</a></li>
+</ul>
+{% endblock %}
+
+
+{% block introduction %}
+<h1>Authors Letter Digitalization</h1>
+<p>This page contains the authors for letter digitalization for each version</p>
+<ul>
+    <li><a href="v1-0-0">Version 1.0</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<section class="v1-0-0" id="v1-0-0">
+    <h1>Version 1.0.0</h1>
+    <h4>Frontend</h4>
+    <ul>
+        <li>Devina Gunawan - 2301919624 - ARE</li>
+        <li>Richie Eviendy - 2301919763 - ARE</li>
+    </ul>
+    <h4>Backend</h4>
+    <ul>
+        <li>Irvine - 2301923990 - ARE</li>
+        <li>Kelvin Cendra - 2301919460 - ARE</li>
+        <li>Raymond Winsher - 2301919574 - ARE</li>
+    </ul>
+</section>
+
+{% endblock %}

@@ -1,0 +1,167 @@
+/***********************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.show {
+  display: block;
+}
+
+textarea {
+  resize: none;
+}
+
+input, select, textarea {
+  border: none;
+  outline: none;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+.top-container {
+  width: 100%;
+  height: 37.5%;
+  background-color: white;
+  position: relative;
+}
+
+.top-container .logo, .top-container .tophex {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 15%;
+}
+
+.top-container .tophex {
+  left: 0;
+  width: 62.5%;
+  transform: translateX(-12.5%);
+}
+
+.top-container .bothex {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 62.5%;
+}
+
+.top-container h1 {
+  font-size: 10rem;
+  color: #75A339;
+  letter-spacing: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 20%);
+  text-shadow: 10px -5px 5px #bfbfbf;
+  transition: 0.5s;
+  animation: move_text 1s linear infinite;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+.bot-container {
+  width: 100%;
+  height: 62.5%;
+  background: #95b854;
+  background: linear-gradient(180deg, #75A339 25%, #EBF29B);
+  position: relative;
+}
+
+.bot-container h1 {
+  font-size: 2.5rem;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, 50%);
+}
+
+.bot-container p {
+  font-size: 1.125rem;
+  color: white;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 25%);
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.bot-container p:nth-child(even) {
+  top: 30%;
+}
+
+.bot-container p a {
+  font-size: 1.25rem;
+  color: white;
+  text-decoration: none;
+}
+
+.bot-container p a:hover {
+  text-decoration: underline;
+}
+
+.bot-container .wrap-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 62.5%;
+  background-image: url("../images/city.png");
+  background-size: 200% 100%;
+  background-repeat: repeat-x;
+  background-position: 0 100%;
+  animation: move_background_image 30s linear infinite;
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+@keyframes move_text {
+  50% {
+    transform: translate(-50%, 0%);
+  }
+  100% {
+    transform: translate(-50%, 20%);
+  }
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+@keyframes move_background_image {
+  from {
+    background-position: 0 100%;
+  }
+  to {
+    background-position: 200% 100%;
+  }
+}
+
+/***********************************************************************************/
+/***********************************************************************************/
+/*# sourceMappingURL=error_page.css.map */

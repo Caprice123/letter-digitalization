@@ -1,0 +1,125 @@
+/***********************************************************************************/
+// THIS STYLE IS FOR THE RESET PASSWORD
+/***********************************************************************************/
+
+/***********************************************************************************/
+// MAIN CONTAINER
+.main-container{
+    @include positionCenter;
+    box-shadow: 10px 13px 15px -2px rgba(0,0,0,0.84);
+    width : 80%;
+    height : 80%;
+    background-color: rgba(245, 222, 179, 0);
+    display: flex;
+    margin: 0 auto;
+    overflow : hidden;
+    border-radius: 20px;
+    /***********************************************************************************/
+    // IMAGE DOODLES
+    .left-container{
+        width: 30%;
+        height: 100%;
+        @include flexbox(space-evenly, column);
+        align-items: center;
+        background-color: rgb(116,161,56);
+        background: linear-gradient(180deg, rgba(116,161,56,1) 0%, rgba(157,216,78,1) 50%, rgba(245,248,163,1) 100%);   
+        position: relative;
+        
+    }
+    /***********************************************************************************/
+
+    /***********************************************************************************/
+    // RESET PASSWORD FORM CONTAINER
+    .right-container{
+        width: 70%;
+        height: 100%;
+        background: rgb(220,220,209);
+        background: linear-gradient(0deg, rgba(220,220,209,1) 0%, rgba(255,255,255,1) 50%, rgba(220,220,209,1) 100%);      
+        position: relative;
+        /***********************************************************************************/
+        // TITLE
+        .up{
+            margin-bottom: 5%;
+            width: 100%;
+            height: 10%;
+            border-radius: 10px;
+            text-align: center;
+            color:white;
+            @include centerThings;
+        }
+        /***********************************************************************************/
+
+        /***********************************************************************************/
+        // MAIN FORM
+        .down{
+            @include positionCenter;
+            width: 90%;
+            height: 80%;
+            background-color:transparent;
+            border-radius: 10px;
+            text-align: center;
+            @include flexbox(space-evenly, column);
+            z-index: 5000;
+            .changepassword{
+                color: #547c20;
+                z-index: 100;
+                height: 100px;
+                @include centerThings;
+                padding-top: 80px;
+                text-align: center;
+            }
+            div p{
+                width: 40%;
+                text-align: left;
+                color: gray;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .createnewpassword,
+            .confirmnewpassword{
+                width: 80%;
+                height: 100px;
+                @include flexbox(space-evenly, row);
+                margin: auto;
+                align-items: center;
+                .crepassword,
+                .conpassword{
+                    height: 40%;
+                    width: 50%;
+                    border :none;
+                    padding: 0 30px;
+                    border-radius: 10px;
+                    z-index: 500;
+                    background: linear-gradient(360deg, #d0dbda, #ffffff);
+                    box-shadow: inset 3px 3px 3px #A9B6AF, inset 3px 3px 3px #F9FFFF;
+                }
+            }
+            .submit {
+                border: none;
+                color: white;
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0 auto;
+                height: 50px;
+                width: 20%;
+                text-transform: uppercase;
+                cursor: pointer;
+                border-radius: 30px;
+                z-index: 500;
+                background: linear-gradient(180deg, rgba(116,161,56,1) 20%, rgba(157,216,78,1) 80%);
+                &:hover{
+                    background: #446619; 
+                }
+                &:active{
+                    background-color: hsl(154, 14%, 20%);
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
+            }
+        }
+        /***********************************************************************************/
+    }
+    /***********************************************************************************/
+}
+/***********************************************************************************/

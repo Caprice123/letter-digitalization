@@ -1,0 +1,26 @@
+{% extends 'Admin_page/template.html' %}
+
+<!----------------------------------------------------------------------------------------------------------->
+<!-- SIDEBAR -->
+{% block dropdown_sidebar %}
+<img src="{{ bawahKiri }}" class="bawahkiri" alt="imageerror">
+<img src="{{ mail }}" class="mail" alt="imageerror">
+<a href="{{ url_for('admin_record_page', page=1) }}" class="tablinks" id="defaultOpen">Records</a>
+<button class="dropdown-btn">User</button>
+<div id="userdropdown" class="dropdown-container">
+    <a href="{{ url_for('admin_user_student_page', page=1) }}">Student</a>
+    <a href="{{ url_for('admin_user_teacher_page', page=1) }}">Teacher</a>
+    <a href="{{ url_for('admin_user_admin_page', page=1) }}">Admin</a>
+</div>
+<a href="{{ url_for('admin_category_page', page=1) }}" class="tablinks">Category</a>
+<a href="{{ url_for('admin_history_page', page=1) }}" class="tablinks">History</a>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+<!----------------------------------------------------------------------------------------------------------->
+<!-- ADDITIONAL SCRIPT -->
+{% block script %}
+<script src="{{ url_for('static', filename='js/admin/record.js') }}"></script>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  

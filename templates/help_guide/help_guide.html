@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/orang.png') }}">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/help_guide.css') }}">
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+    <div class="main-container">
+        
+        <div class="left-container">
+            <img loading="lazy" src="../../static/images/orang.png" alt="imageerror">
+            <h1>Letter Digitalization</h1>
+            
+            {% block table_of_content %}
+            
+            {% endblock %}
+            
+        </div>
+        <div class="right-container">
+            <section class="introduction" id="introduction">
+
+                {% block introduction %}
+                {% endblock %}
+            </section>
+            <section class="content" id="content">
+                {% block content %}
+                {% endblock %}
+            </section>
+            
+        </div>
+    </div>
+    <footer>
+        <div class="project">
+            <p>Letter Digitalization v1.0</p>
+        </div>
+        <div class="year">
+            <p style="color: #B0DE61;">&copy; 2022 BASE</p>
+        </div>
+    </footer>
+</body>
+</html>
+

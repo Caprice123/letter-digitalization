@@ -1,0 +1,115 @@
+{% extends 'Admin_page/template.html' %}
+
+<!----------------------------------------------------------------------------------------------------------->
+<!-- HELP GUIDE BUTTON -->
+{% block help_guide %}
+<div class="help-guide">
+    <a href="{{ url_for('help_guide_admin') + '#student'}}" target="_blank">
+        <img src="{{ help_guide }}" alt="imageerror">
+    </a>
+</div>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+<!----------------------------------------------------------------------------------------------------------->
+<!-- ADD BUTTON -->
+{% block addbutton %}
+<button class="addbutton">
+    <img src="{{ addButton }}" class="addadmin" alt="imageerror">
+</button>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+<!----------------------------------------------------------------------------------------------------------->
+<!-- ADD POPUP WINDOW -->
+{% block addpopup %}
+<form action="{{ url_for('admin_user_add_student') }}" method="POST" class="form-container">
+    <h1>STUDENT FORM</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <input type="text" placeholder="Name" name="name" class="addname"required>
+    <input type="text" placeholder="NIM" name="nim"  class="addnim" required>
+    <select name='jurusan' class="addjurusan" required>
+        <option value="Major">Major</option>
+        {% for jurusan in available_jurusan %}
+        <option value="{{jurusan}}">{{ jurusan }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" placeholder="Email" name="email" class="addemail" required>
+    <button type="submit" class="btnsubmit">Submit</button>
+    <button type="button" class="btncancel"> &#60; Back</button>
+  </form>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+<!----------------------------------------------------------------------------------------------------------->
+<!-- SIDEBAR -->
+{% block dropdown_sidebar %}
+<img src="{{ bawahKiri }}" class="bawahkiri" alt="imageerror">
+<img src="{{ mail }}" class="mail" alt="imageerror">
+<a href="{{ url_for('admin_record_page', page=1) }}" class="tablinks" id="defaultOpen">Records</a>
+<button class="dropdown-btn active">User</button>
+<div id="userdropdown" class="dropdown-container active">
+    <a href="{{ url_for('admin_user_student_page', page=1) }}">Student</a>
+    <a href="{{ url_for('admin_user_teacher_page', page=1) }}">Teacher</a>
+    <a href="{{ url_for('admin_user_admin_page', page=1) }}">Admin</a>
+</div>
+<a href="{{ url_for('admin_category_page', page=1) }}" class="tablinks">Category</a>
+<a href="{{ url_for('admin_history_page', page=1) }}" class="tablinks">History</a>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+
+{% block edit_delete_form %}
+<!----------------------------------------------------------------------------------------------------------->
+<!-- DELETE FORM -->
+<form method="POST" action="{{ url_for('admin_user_delete_student_page') }}">
+    <input type="hidden" name="id" class="id-input-delete">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button type="submit" style="display: none;" class="submit-delete"></button>
+</form>
+<!----------------------------------------------------------------------------------------------------------->
+  
+<!----------------------------------------------------------------------------------------------------------->
+<!-- EDIT FORM -->
+<div class="studenteditpopupcontainer">
+    <div class="student">
+      <p>STUDENT</p>
+    </div>
+    <form method="POST" action="{{ url_for('admin_user_edit_student_page') }}" class="inputeditcontainer">
+        <input type="hidden" name="id" class="id-input-edit">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button type="submit" style="display: none;" class="submit-edit"></button>
+        <input type="text" name="name" class="editnama" placeholder="Nama">
+        <input type="number" name="nim" class="editnim" placeholder="NIM">
+        <select name="jurusan" class="editjurusan">
+            <option value="Major">Major</option>
+            {% for jurusan in available_jurusan %}
+            <option value="{{jurusan}}">{{ jurusan }}</option>
+            {% endfor %}
+        </select>
+        <input type="email" name="email" class="editemail" placeholder="Email">
+    </form>
+    <div class="buttonconfirm">
+        <button class="confirm">
+            <p>CONFIRM</p>
+        </button>
+    </div>
+    <div class="buttonback">
+        <button class="back">
+            <p>back</p>
+        </button>
+    </div>
+</div>
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
+
+<!----------------------------------------------------------------------------------------------------------->
+<!-- ADDITIONAL SCRIPT -->
+{% block script %}
+
+<script src="{{ url_for('static', filename='js/admin/student.js') }}"></script>
+
+{% endblock %}
+<!----------------------------------------------------------------------------------------------------------->
+  
