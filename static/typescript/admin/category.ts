@@ -588,9 +588,10 @@ class EditCategroryForm extends EditForm{
          */
         // filter only the content of the letter
         content = (content.match(/<div class="content">([\S\s]*?)<\/div>/) as any)[1]
-        
+        console.log(content)
         // remove the <p>, <span>, data. and <br>
-        content = content.replaceAll(/<p>|<\/p>|<\/span>|data.|<br>|\|safe/g, "")
+        content = content.replaceAll(/<p>|<\/p>|<\/span>|<br>|\|safe/g, "")
+        content = content.replaceAll("data.", "")
         
         // convert <span> to tab
         content = content.replaceAll("<span>", "\t")

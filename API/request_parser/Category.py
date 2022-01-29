@@ -17,7 +17,6 @@ postParser = reqparse.RequestParser()
 postParser.add_argument("category_name", type=str, help="The name of the category", required=True)
 postParser.add_argument("path_format", type=str, help="The format html of the category", required=True)
 postParser.add_argument("disabled", type=inputs.boolean, help="The visibility status to user")
-postParser.add_argument("columns", action='append')
 postParser.add_argument("visible_role", type=str, help="Role can see the category", required=True)
 postParser.add_argument("required_role_accept", type=str, help="Role needed to accept or reject the category", required=True)
 #########################################################################################################
@@ -31,7 +30,6 @@ putParser.add_argument("category_name", type=str, help="The name of the category
 putParser.add_argument("path_format", type=str, help="The format html of the category", required=True)
 putParser.add_argument("visible_role", type=str, help="Role can see the category", required=True)
 putParser.add_argument("required_role_accept", type=str, help="Role needed to accept or reject the category", required=True)
-putParser.add_argument("columns", action='append')
 #########################################################################################################
 
 #########################################################################################################

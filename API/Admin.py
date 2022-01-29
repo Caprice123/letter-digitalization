@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
 from Models.Admin import Admins
 from Models.UserRole import UserRole
-from server import db, token_required, app, compress, limiter
+from server import db, token_required, app, compress
 from API import api
 from API.marshal_fields.Admin import admin_fields
 from API.docs import Admin as AdminDocs

@@ -435,8 +435,10 @@ var EditCategroryForm = /** @class */ (function (_super) {
          */
         // filter only the content of the letter
         content = content.match(/<div class="content">([\S\s]*?)<\/div>/)[1];
+        console.log(content);
         // remove the <p>, <span>, data. and <br>
-        content = content.replaceAll(/<p>|<\/p>|<\/span>|data.|<br>|\|safe/g, "");
+        content = content.replaceAll(/<p>|<\/p>|<\/span>|<br>|\|safe/g, "");
+        content = content.replaceAll("data.", "");
         // convert <span> to tab
         content = content.replaceAll("<span>", "\t");
         var splitcontent = content.split("\n");
