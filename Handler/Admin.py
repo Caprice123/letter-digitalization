@@ -594,8 +594,8 @@ class AdminCategoryHandler(AdminHandler):
         urutan_accepted = [teacher.strip() for teacher in urutan_accepted if teacher not in can_see_records]
         visible_role = can_see_records
         visible_role.extend(urutan_accepted)
+        visible_role = set(visible_role)
         visible_role = ",".join(visible_role)
-        print(visible_role)
 
         # the required role accept
         required_role_accept = form['urutan_accepted']

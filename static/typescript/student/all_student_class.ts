@@ -182,30 +182,40 @@ class AddRecordForm{
                 fetch(`admin/${category[0].path_format}`)
                 .then(res => res.text())
                 .then( (content: str) => {
-                    
+                    console.log(content)
                     content = (content.match(/<div class="content">([\S\s]*?)<\/div>/) as any)[1]
                     content = content.replaceAll("|safe", "")
                     console.log(content)
 
                     content = (content.match(/{{data.(.*?)}}/g) as any)
+                    console.log(content)
+                    if (content){
+                        content = content.map(text => {
+                            text = text.replaceAll("{{data.","")
+                            text = text.replaceAll("}}", "")
+                            text = text.replaceAll("_", " ")
+                            return text
+                        })
+                        var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"]
+                        content = content.filter(text => !alr_have_column.includes(text) )
+                        
+                        var columns = new Set(content)
+                        console.log(columns)
+                    }
                     
-                    content = content.map(text => {
-                        text = text.replaceAll("{{data.","")
-                        text = text.replaceAll("}}", "")
-                        text = text.replaceAll("_", " ")
-                        return text
-                    })
-                    var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"]
-                    content = content.filter(text => !alr_have_column.includes(text) )
-                    
-                    var columns = new Set(content)
-                    console.log(columns)
                     // if no need column that is needed to be submitted then
                     // auto submit the form
-                    if (columns.length == 0){
+                    if(columns){
+                        if (columns.length == 0){
+                            this.submitFormButton.click()
+                            return
+                        }
+                    }
+                    else{
                         this.submitFormButton.click()
                         return
                     }
+                    
 
                     // make the form based on the category column needed to be inserted
                     columns.forEach(

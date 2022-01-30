@@ -115,12 +115,12 @@ var AdminAdmin = /** @class */ (function (_super) {
                 // enabled visualization
                 if (data.disabled == false) {
                     new_row =
-                        "\n                        <tr>\n                            <td>".concat(data.category_id, "</td>\n                            <td>").concat(data.category_name, "</td>\n                            <td>\n                                <div class=\"response\">\n                                    <button class=\"edit\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>\n                                    <button class=\"delete\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-trash-o\"></i></button>\n                                </div> \n                            </td>\n                        </tr>\n                        ");
+                        "\n                        <tr>\n                            <td>".concat(data.category_id, "</td>\n                            <td>").concat(data.category_name, "</td>\n                            <td>").concat(data.required_role_accept, "</td>\n                            <td>\n                                <div class=\"response\">\n                                    <button class=\"edit\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>\n                                    <button class=\"delete\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-trash-o\"></i></button>\n                                </div> \n                            </td>\n                        </tr>\n                        ");
                 }
                 // disabled visualization
                 else {
                     new_row =
-                        "\n                        <tr style=\"text-decoration:line-through;\">\n                            <td>".concat(data.category_id, "</td>\n                            <td>").concat(data.category_name, "</td>\n                            <td>\n                                <div class=\"response\">\n                                    <button class=\"edit\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>\n                                    <button class=\"delete\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-refresh\" aria-hidden=\"true\"></i></button>\n                                </div> \n                            </td>\n                        </tr>\n                        ");
+                        "\n                        <tr style=\"text-decoration:line-through;\">\n                            <td>".concat(data.category_id, "</td>\n                            <td>").concat(data.category_name, "</td>\n                            <td>").concat(data.required_role_accept, "</td>\n                            <td>\n                                <div class=\"response\">\n                                    <button class=\"delete\" data-id=\"").concat(data.category_id, "\"> <i class=\"fa fa-refresh\" aria-hidden=\"true\"></i></button>\n                                </div> \n                            </td>\n                        </tr>\n                        ");
                 }
                 _this.tbody.insertAdjacentHTML("beforeend", new_row);
             });
@@ -498,7 +498,7 @@ var EditCategroryForm = /** @class */ (function (_super) {
     return EditCategroryForm;
 }(EditForm));
 // the table columns
-var theadColumns = "\n<tr>\n    <th>ID</th>\n    <th>Name</th>\n    <th>Actions</th>\n</tr>\n";
+var theadColumns = "\n<tr>\n    <th>ID</th>\n    <th>Name</th>\n    <th>Required Accept</th>\n    <th>Actions</th>\n</tr>\n";
 // make the admin category data UI
 var categoryrAdmin = new AdminAdmin(datas.categories, theadColumns);
 // make the add popup window UI

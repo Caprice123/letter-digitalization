@@ -36,7 +36,16 @@ def forbidden(e):
 # RESOURCE CONFLICT
 @app.errorhandler(409)
 def already_exists(e):
+    print(request.referrer)
     flash("Unsuccessful Creating or Updating Data", "Error")
+    return redirect(request.referrer)
+#########################################################################################################
+
+#########################################################################################################
+# PRECONDITIONAL FAILED
+@app.errorhandler(412)
+def preconditional_failed(e):
+    flash("Conflict with Required Role Accept in Category", "Error")
     return redirect(request.referrer)
 #########################################################################################################
 

@@ -122,23 +122,33 @@ var AddRecordForm = /** @class */ (function () {
             fetch("admin/".concat(category[0].path_format))
                 .then(function (res) { return res.text(); })
                 .then(function (content) {
+                console.log(content);
                 content = content.match(/<div class="content">([\S\s]*?)<\/div>/)[1];
                 content = content.replaceAll("|safe", "");
                 console.log(content);
                 content = content.match(/{{data.(.*?)}}/g);
-                content = content.map(function (text) {
-                    text = text.replaceAll("{{data.", "");
-                    text = text.replaceAll("}}", "");
-                    text = text.replaceAll("_", " ");
-                    return text;
-                });
-                var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"];
-                content = content.filter(function (text) { return !alr_have_column.includes(text); });
-                var columns = new Set(content);
-                console.log(columns);
+                console.log(content);
+                if (content) {
+                    content = content.map(function (text) {
+                        text = text.replaceAll("{{data.", "");
+                        text = text.replaceAll("}}", "");
+                        text = text.replaceAll("_", " ");
+                        return text;
+                    });
+                    var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"];
+                    content = content.filter(function (text) { return !alr_have_column.includes(text); });
+                    var columns = new Set(content);
+                    console.log(columns);
+                }
                 // if no need column that is needed to be submitted then
                 // auto submit the form
-                if (columns.length == 0) {
+                if (columns) {
+                    if (columns.length == 0) {
+                        _this.submitFormButton.click();
+                        return;
+                    }
+                }
+                else {
                     _this.submitFormButton.click();
                     return;
                 }

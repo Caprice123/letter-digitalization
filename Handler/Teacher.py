@@ -1,5 +1,6 @@
 from typing import List, Tuple
 from werkzeug.datastructures import ImmutableDict
+from Interface.Admin import AdminInterface
 from Interface.Record import RecordInterface
 from Interface.Student import StudentInterface
 from Interface.Teacher import TeacherInterface
@@ -79,7 +80,9 @@ class TeacherHandler:
         self.__record_interface = RecordInterface(token)
         self.__teacher_interface = TeacherInterface(token)
         self.__student_interface = StudentInterface(token)
+        self.__admin_interface = AdminInterface(token)
         self.__user = self.__get_teacher(id)
+        self.__status = 0
         
     #########################################################################################################
     # PUBLIC METHOD
@@ -316,6 +319,11 @@ class TeacherHandler:
         student_nim = record['has_record']['nim']
         record_status = record['status']
         record_id = record['record_id']
+        
+        destinations = record['required_role_accept']
+        role_now = self.user['role']
+        
+        
                 
         # preparing filename
         filename = f"{title}_{student_nim}_{record_id}.pdf"
@@ -343,16 +351,26 @@ class TeacherHandler:
                       recipients=recipients, 
                       cc = cc)
         
-        msg.body = "Surat Diterima" if form_response == "accepted" else "Surat Ditolak"
-            
+        # recipients email detected
+        if self.status == 1:
+            msg.body = "Surat Diterima" if form_response == "accepted" else "Surat Ditolak"
+        else:
+            next_destination = destinations.index(role_now)
+            next_destination = destinations[next_destination + 1]
+            msg.body = f"Missing account email for teacher with role {next_destination} for major {record['jurusan']}.\nPlease make the account with major if the teacher only responsible in one major else leave the major form blank."
+        
+        
+         
         print("CC -> ", cc)
         print("Recipients -> ", recipients)
         print("File -> ", file_will_be_sent)
         print("Message -> ", msg.body)
             
-        # attach the file to the email
-        with app.open_resource(file_will_be_sent) as fp:
-            msg.attach(f"{title}_{student_nim}_{record_id}.pdf", "application/pdf", fp.read())
+        # recipients email detected then attach file
+        if self.status == 1:
+            # attach the file to the email
+            with app.open_resource(file_will_be_sent) as fp:
+                msg.attach(f"{title}_{student_nim}_{record_id}.pdf", "application/pdf", fp.read())
             
         return msg
     
@@ -417,12 +435,21 @@ class TeacherHandler:
                 else:
                     next_user = next_user
                 
-                # append the emails to the recipients  
-                for teacher in next_user:
-                    recipients.append(teacher['email'])
+                # append the emails to the recipients if recipients email detected   
+                # else alert the admin
+                if next_user:
+                    for teacher in next_user:
+                        recipients.append(teacher['email'])
+                    self.status = 1
+                    
+                else:
+                    next_email = self.admin_interface.get()['admins']
+                    for admin in next_email:
+                        recipients.append(admin['email'])
+                    self.status = 0
                 
             except IndexError:
-                pass
+                self.status = 1
             
         # if teacher response is rejected
         elif response == "rejected":
@@ -452,19 +479,22 @@ class TeacherHandler:
         """
         cc = []
         
-        # if the teacher response if accepted
-        student = self.student_interface.get(user_id = student_id)['students'][0]
-        if response == "accepted":
-            # append the student email to cc
-            cc.append(student['email'])
-        
-        # get all email of teacher with role operational
-        operational = self.teacher_interface.get(can_see_records=True)
-        operational = operational['teachers']
-        
-        for teacher in operational:
-            if teacher['jurusan'] == "" or teacher['jurusan'] == student['jurusan']:
-                cc.append(teacher['email'])
+        # recipients email detected then add cc
+        if self.status == 1:
+            
+            # if the teacher response if accepted
+            student = self.student_interface.get(user_id = student_id)['students'][0]
+            if response == "accepted":
+                # append the student email to cc
+                cc.append(student['email'])
+            
+            # get all email of teacher with ability can see all records
+            can_see_records = self.teacher_interface.get(can_see_records=True)
+            can_see_records = can_see_records['teachers']
+            
+            for teacher in can_see_records:
+                if teacher['jurusan'] == "" or teacher['jurusan'] == student['jurusan']:
+                    cc.append(teacher['email'])
             
         return cc
     
@@ -526,6 +556,16 @@ class TeacherHandler:
     @record_interface.getter
     def record_interface(self):
         return self.__record_interface
+    
+    @property
+    def admin_interface(self):
+        return self.__admin_interface
+    
+    
+    @admin_interface.getter
+    def admin_interface(self):
+        return self.__admin_interface
+    
     @property
     def user(self):
         return self.__user
@@ -533,4 +573,16 @@ class TeacherHandler:
     @user.getter
     def user(self):
         return self.__user
+    
+    @property
+    def status(self):
+        return self.__status
+    
+    @status.getter
+    def status(self):
+        return self.__status
+    
+    @status.setter
+    def status(self, status):
+        self.__status = status
     #########################################################################################################

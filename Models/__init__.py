@@ -1,1 +1,1 @@
-from Models import Admin, Teacher, Student, Category, Record, History, CategoryColumn, UserRole
+from Models import Admin, Teacher, Student, Category, Record, History, UserRole

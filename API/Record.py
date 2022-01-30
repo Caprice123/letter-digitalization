@@ -78,8 +78,6 @@ class RecordsAPI(Resource):
             if args.get("status") == "sent":
                 # return if (the record is not accepted and rejected) and (record last updated by doesn't contain current teacher role)
                 all_record = all_record.filter(Records.status.notlike("accepted") & Records.status.notlike("rejected") & ~Records.last_updated_by.contains(teacher.role))
-                if teacher.can_see_records:
-                    all_record = all_record.filter(Records.status.like("sent"))
                 
             # filtering status record accepted
             elif args.get("status") == "accepted":

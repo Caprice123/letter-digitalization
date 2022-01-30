@@ -93,6 +93,8 @@ class Interface:
             a dictionary for the deleted data
         """
         deleted = requests.delete(self.__api_link, data = kwargs, headers={'x-access-tokens': self.token})
+        if deleted.status_code >= 400:
+            abort(deleted.status_code)
         return deleted.json()
     
     

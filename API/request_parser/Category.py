@@ -7,6 +7,7 @@ from requests.api import put
 #########################################################################################################
 # GET argument parser
 getParser = reqparse.RequestParser()
+getParser.add_argument("category_id", type=int, help="The id of category")
 getParser.add_argument("disabled", type=inputs.boolean, help="The visibility status to user")
 getParser.add_argument("page", type=int, help="The page of the user")
 #########################################################################################################
