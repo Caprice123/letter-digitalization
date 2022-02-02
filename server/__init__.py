@@ -67,6 +67,7 @@ csrf = CSRFProtect(app)
 
 # initialize autodoc object for auto generating documentation for all routes
 autodoc = Autodoc(app)
+
 #########################################################################################################
 
 #########################################################################################################
@@ -112,10 +113,11 @@ def role_required(*roles):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        
         token = None
         # check detected x-access-tokens in headers of a request
         if 'x-access-tokens' in request.headers:
-             token = request.headers['x-access-tokens']
+            token = request.headers['x-access-tokens']
         
         # if no token then abort 403 (unauthorized)
         if not token:

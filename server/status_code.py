@@ -1,8 +1,12 @@
 import requests
-from werkzeug.utils import redirect
-from server import app
-from flask import render_template, url_for, session, flash, request
+from Interface.Admin import AdminInterface
+from Models.UserRole import UserRole
+from server import app, mail, token_required
+from flask import render_template, url_for, session, flash, request, redirect
 from flask_wtf.csrf import CSRFError
+from flask_mail import Message
+from threading import Thread
+from server.error_code import InsufficientStorage
 
 #########################################################################################################
 # UNAUTHORIZED
@@ -45,7 +49,10 @@ def already_exists(e):
 # PRECONDITIONAL FAILED
 @app.errorhandler(412)
 def preconditional_failed(e):
-    flash("Conflict with Required Role Accept in Category", "Error")
+    if "student" in request.referrer:
+        flash("There are records still in progress", 'Error')
+    elif "teacher" in request.referrer:
+        flash("Conflict with Required Role Accept in Category", "Error")
     return redirect(request.referrer)
 #########################################################################################################
 
@@ -54,6 +61,23 @@ def preconditional_failed(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template("response_code.html", error_code = 500, status_desc = "Internal Server Error", destination_link = session['default_url'] if session['default_url'] else url_for('login_page'))
+#########################################################################################################
+
+#########################################################################################################
+# INTERNAL SERVER ERROR
+
+@app.errorhandler(InsufficientStorage)
+def insufficient_storage(e):
+    admins = UserRole.query.filter(UserRole.role == "Admin").all()
+    recipients = [admin.email for admin in admins]
+    recipients = [app.config['MAIL_USERNAME']]
+    message = Message("Insufficient Memory. Please clean some memory by deleting some files",
+                      sender = app.config['MAIL_USERNAME'],
+                      recipients=recipients,
+                      )
+    message.body = "Insufficient Memory. Please clean some memory by deleting some files"
+    mail.send(message)
+    return render_template("response_code.html", error_code = 507, status_desc = "Insufficient Storage", destination_link = session['default_url'] if session['default_url'] else url_for('login_page'))
 #########################################################################################################
 
 #########################################################################################################

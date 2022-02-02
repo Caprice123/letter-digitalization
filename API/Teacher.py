@@ -278,7 +278,7 @@ class TeacherAPI(Resource):
         # if there is category only need its role to accept abort 412
         if (category_updated):
             db.session.rollback()
-            abort(412)
+            abort(412, description="Conflict with Required Role Accept in Category")
             
         # if no category then search for other teacher with the same role
         else:

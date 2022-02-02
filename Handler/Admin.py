@@ -12,6 +12,7 @@ import re
 import codecs
 import os
 from Models.UserRole import UserRole
+from server.error_code import InsufficientStorage
 
 #########################################################################################################
 class AdminHandler():
@@ -476,9 +477,12 @@ class AdminCategoryHandler(AdminHandler):
         with app.app_context():
             # creating new template 
             new_template = render_template("pdf_template/template.html", contents = contents)
-            
-            with codecs.open(f"templates/pdf_template/{category_name.replace(' ', '_')}.html", 'w', encoding='utf-8') as f:
-                f.write(new_template)
+            try:
+                with codecs.open(f"templates/pdf_template/{category_name.replace(' ', '_')}.html", 'w', encoding='utf-8') as f:
+                    f.write(new_template)
+                    
+            except:
+                raise InsufficientStorage()
           
     def change_visibility_category(self, form: ImmutableDict) -> None:
         """

@@ -1,3 +1,4 @@
+
 from typing import Any, List, Tuple
 from werkzeug.datastructures import ImmutableDict
 from Handler.Admin import AdminAdminHandler
@@ -14,6 +15,8 @@ from server import pdfkit_config, mail, app, brcypt
 from flask_mail import Message
 from Models.UserRole import UserRole
 import re
+
+from server.error_code import InsufficientStorage
  
 #########################################################################################################
 class StudentHandler:
@@ -312,8 +315,15 @@ class StudentHandler:
                                                signed_filename)
         
         # generating pdf
-        pdf_without_signed = self.__create_pdf(rendered_without_signed, file_path_without_signed)
-        pdf_with_signed = self.__create_pdf(rendered_with_signed, file_path_with_signed)
+        try:
+            pdf_without_signed = self.__create_pdf(rendered_without_signed, file_path_without_signed)
+        except:
+            raise InsufficientStorage()
+            
+        try:
+            pdf_with_signed = self.__create_pdf(rendered_with_signed, file_path_with_signed)
+        except:
+            raise InsufficientStorage()
         return (file_path_without_signed, file_path_with_signed)
     
     def __filter_form(self, form: ImmutableDict, *excludes) -> dict:
