@@ -133,6 +133,14 @@ class TeacherAPI(Resource):
             db.session.add(new_teacher)
             db.session.commit()
             
+            # update visible role category if teacher can see all records
+            if new_teacher.can_see_records:
+                categories = Category.query.filter(~Category.visible_role.contains(args['role']))
+                categories.update({
+                                Category.visible_role : func.concat(Category.visible_role, f",{new_teacher.role}")
+                            }, synchronize_session = False)
+                db.session.commit()
+            
         # abort to 409 (Resource Conflict) because the value of a column is unique
         except IntegrityError:
             db.session.rollback()
