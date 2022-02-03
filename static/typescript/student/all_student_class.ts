@@ -200,42 +200,45 @@ class AddRecordForm{
                         content = content.filter(text => !alr_have_column.includes(text) )
                         
                         var columns = new Set(content)
-                        console.log(columns)
-                    }
-                    
-                    // if no need column that is needed to be submitted then
-                    // auto submit the form
-                    if(columns){
-                        if (columns.length == 0){
+                        console.log(columns.size)
+                        // if no need column that is needed to be submitted then
+                        // auto submit the form
+                        if(columns){
+                            if (columns.size == 0){
+                                this.submitFormButton.click()
+                                return
+                            }
+                        }
+                        else{
                             this.submitFormButton.click()
                             return
                         }
-                    }
-                    else{
-                        this.submitFormButton.click()
-                        return
+                        // make the form based on the category column needed to be inserted
+                        columns.forEach(
+                            (column: str) => {
+                                let new_input: str = 
+                                `
+                                    <tr>
+                                        <td>${column}</td>
+                                        <td>
+                                            <input type="text" name=${column.replace(/\s/g, "_")} style="resize: vertical;"required>
+                                        </td>
+                                    </tr>
+                                `
+                                this.inputContainer.insertAdjacentHTML("beforeend", new_input)
+                            }
+                        )
+                        // slide to the input form that will be needed to be filled
+                        this.popup.classList.add("buttonselected")
+                        this.containerPopupPage.classList.remove("hidden")
                     }
                     
+                    
+                    
 
-                    // make the form based on the category column needed to be inserted
-                    columns.forEach(
-                        (column: str) => {
-                            let new_input: str = 
-                            `
-                                <tr>
-                                    <td>${column}</td>
-                                    <td>
-                                        <input type="text" name=${column.replace(/\s/g, "_")} style="resize: vertical;"required>
-                                    </td>
-                                </tr>
-                            `
-                            this.inputContainer.insertAdjacentHTML("beforeend", new_input)
-                        }
-                )
+                    
                 
-                // slide to the input form that will be needed to be filled
-                this.popup.classList.add("buttonselected")
-                this.containerPopupPage.classList.remove("hidden")
+                
                 })
             })
         )
