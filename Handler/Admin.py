@@ -505,7 +505,10 @@ class AdminCategoryHandler(AdminHandler):
         category_changed = self.category_interface.delete(category_id = form['id'])
             
         # creating history 
-        description = [f"deleting category {category_changed['category_id']}"]
+        if category_changed['disabled']:
+            description = [f"deleting category {category_changed['category_name']}"]
+        else:
+            description = [f"enabling category {category_changed['category_name']}"]
         self._create_history(*description)
        
     def edit_category(self, form: ImmutableDict) -> str:

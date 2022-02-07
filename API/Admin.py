@@ -70,7 +70,7 @@ class AdminAPI(Resource):
         # filtering all admin based on name
         if args.get("name"):
             all_admin = all_admin.filter(Admins.name == args['name'])
-            
+        
         # making pages
         if page:
             all_admin = all_admin.paginate(page, app.config["DATA_PER_PAGE"], False)

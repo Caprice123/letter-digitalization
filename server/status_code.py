@@ -64,7 +64,7 @@ def internal_server_error(e):
 #########################################################################################################
 
 #########################################################################################################
-# INTERNAL SERVER ERROR
+# INSUFFICIENT STORAGE
 
 @app.errorhandler(InsufficientStorage)
 def insufficient_storage(e):
