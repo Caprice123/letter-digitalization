@@ -2,7 +2,6 @@
 from flask_restx import Resource, Namespace
 from sqlalchemy.exc import IntegrityError
 from Models.Category import Category
-from Models.CategoryColumn import CategoryColumns
 from server import db, token_required, compress, app
 from API.marshal_fields.Category import category_fields
 from API import api
@@ -83,8 +82,7 @@ class CategoryAPI(Resource):
                 'path_format': category.path_format,
                 'disabled': category.disabled,
                 'visible_role': category.visible_role.split(","),
-                'required_role_accept': category.required_role_accept.split(","),
-                'columns': [colname.column_name for colname in category.columns]
+                'required_role_accept': category.required_role_accept.split(",")
             }
             response['categories'].append(res)
         
@@ -105,8 +103,6 @@ class CategoryAPI(Resource):
         # parsing the arguments
         args = postParser.parse_args()
         try:
-            # parsing the columns
-            cols = args.pop("columns")
             
             # try to create the category
             new_category = Category(**args)
@@ -120,14 +116,6 @@ class CategoryAPI(Resource):
             abort(409)
             
         
-        if cols is not None:
-            # creating all category column in the category
-            for col in cols:
-                new_column = CategoryColumns(category_id=new_category.category_id,
-                                            column_name=col)
-                db.session.add(new_column)
-                new_category.columns.append(new_column)
-            db.session.commit()
         return new_category
     #########################################################################################################
     
@@ -151,10 +139,7 @@ class CategoryAPI(Resource):
             category_update.path_format = args['path_format']
             category_update.visible_role = args['visible_role']
             category_update.required_role_accept = args['required_role_accept']
-            #  deleting all before columns
-            for _ in category_update.columns:
-                column = category_update.columns.pop()
-                db.session.delete(column)
+            
             
             
             db.session.commit()
@@ -163,13 +148,6 @@ class CategoryAPI(Resource):
             db.session.rollback()
             abort(409)
         
-        if args.get("columns"):
-            # creating all columns needed to be filled in the category
-            for column in args['columns']:
-                column = CategoryColumns(category_id = args['category_id'], column_name = column)
-                db.session.add(column)
-                category_update.columns.append(column)
-            db.session.commit()
         return category_update
     #########################################################################################################
 

@@ -118,22 +118,49 @@ var AddRecordForm = /** @class */ (function () {
         categoryButtons.forEach(function (button) { return button.addEventListener("click", function (e) {
             // assign the category id of the record
             _this.idInput.value = button.dataset.categoryid;
-            var columns = _this.categories.filter(function (category) { return category.category_id == button.dataset.categoryid; });
-            columns = columns[0].columns;
-            // if no need column that is needed to be submitted then
-            // auto submit the form
-            if (columns.length == 0) {
-                _this.submitFormButton.click();
-                return;
-            }
-            // make the form based on the category column needed to be inserted
-            columns.forEach(function (column) {
-                var new_input = "\n                            <tr>\n                                <td>".concat(column, "</td>\n                                <td>\n                                    <input type=\"text\" name=").concat(column.replace(/\s/g, "_"), " style=\"resize: vertical;\"required>\n                                </td>\n                            </tr>\n                        ");
-                _this.inputContainer.insertAdjacentHTML("beforeend", new_input);
+            var category = _this.categories.filter(function (category) { return category.category_id == button.dataset.categoryid; });
+            fetch("admin/".concat(category[0].path_format))
+                .then(function (res) { return res.text(); })
+                .then(function (content) {
+                console.log(content);
+                content = content.match(/<div class="content">([\S\s]*?)<\/div>/)[1];
+                content = content.replaceAll("|safe", "");
+                console.log(content);
+                content = content.match(/{{data.(.*?)}}/g);
+                console.log(content);
+                if (content) {
+                    content = content.map(function (text) {
+                        text = text.replaceAll("{{data.", "");
+                        text = text.replaceAll("}}", "");
+                        text = text.replaceAll("_", " ");
+                        return text;
+                    });
+                    var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"];
+                    content = content.filter(function (text) { return !alr_have_column.includes(text); });
+                    var columns = new Set(content);
+                    console.log(columns.size);
+                    // if no need column that is needed to be submitted then
+                    // auto submit the form
+                    if (columns) {
+                        if (columns.size == 0) {
+                            _this.submitFormButton.click();
+                            return;
+                        }
+                    }
+                    else {
+                        _this.submitFormButton.click();
+                        return;
+                    }
+                    // make the form based on the category column needed to be inserted
+                    columns.forEach(function (column) {
+                        var new_input = "\n                                    <tr>\n                                        <td>".concat(column, "</td>\n                                        <td>\n                                            <input type=\"text\" name=").concat(column.replace(/\s/g, "_"), " style=\"resize: vertical;\"required>\n                                        </td>\n                                    </tr>\n                                ");
+                        _this.inputContainer.insertAdjacentHTML("beforeend", new_input);
+                    });
+                    // slide to the input form that will be needed to be filled
+                    _this.popup.classList.add("buttonselected");
+                    _this.containerPopupPage.classList.remove("hidden");
+                }
             });
-            // slide to the input form that will be needed to be filled
-            _this.popup.classList.add("buttonselected");
-            _this.containerPopupPage.classList.remove("hidden");
         }); });
     };
     return AddRecordForm;

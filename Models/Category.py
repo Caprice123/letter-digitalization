@@ -10,7 +10,6 @@ class Category(db.Model):
     
     disabled = db.Column(db.Boolean, nullable=False, default=False)
     records = db.relationship("Records", backref="category", lazy=True)
-    columns = db.relationship("CategoryColumns", backref="category", lazy=True)
     
     def __repr__(self):
         return f"Category {self.category_name}"

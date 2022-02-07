@@ -69,7 +69,7 @@ def teacher_change_password(token):
     return render_template("change_password.html", user_role = "Teacher")
     
 @autodoc.doc(groups='teacher')
-@app.route('/teacher/change-password', methods=["POST"])
+@app.route('/teacher/update-password', methods=["POST"])
 @login_required
 @role_required("Teacher")
 @check_token
