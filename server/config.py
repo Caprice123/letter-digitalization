@@ -38,9 +38,11 @@ class Config:
     SQLALCHEMY_DATABASE_URI = f'sqlite:///{PATH_DATABASE}/testing.db' 
     
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI",f"mysql://root:{keyring.get_password('UAS_DATABASE', 'password_mysql')}@localhost/letter_digitalization")  
+    # SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI",f"mysql://root:{keyring.get_password('UAS_DATABASE', 'password_mysql')}@localhost/letter_digitalization")  
     MAIL_USERNAME = os.getenv("MAIL_USERNAME", "kelvin.cendra001@binus.ac.id")
-    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", keyring.get_password("UAS_DATABASE", MAIL_USERNAME))
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")  
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+    # MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", keyring.get_password("UAS_DATABASE", MAIL_USERNAME))
     
 class ProductionConfig(Config): 
     SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")  
