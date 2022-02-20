@@ -7,7 +7,7 @@ from flask_login import LoginManager, current_user, login_required
 from flask_mail import Mail
 import pdfkit
 from flask_wtf import CSRFProtect
-from server.config import DevelopmentConfig
+from server.config import ProductionConfig
 import jwt
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
@@ -40,7 +40,7 @@ pdfkit_config = pdfkit.configuration(wkhtmltopdf=PATH_WKHTMLTOPDF)
 #########################################################################################################
 # configure flask server
 app = Flask(__name__, template_folder=PATH_TEMPLATE, static_folder=PATH_STATIC)
-app.config.from_object(DevelopmentConfig())
+app.config.from_object(ProductionConfig())
 #########################################################################################################
 
 #########################################################################################################
