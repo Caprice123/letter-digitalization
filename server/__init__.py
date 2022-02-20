@@ -12,7 +12,7 @@ import jwt
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
 from flask_compress import Compress
-from flask_autodoc.autodoc import Autodoc
+# from flask_autodoc.autodoc import Autodoc
 from sqlalchemy import inspect
 
 #########################################################################################################
@@ -66,7 +66,7 @@ compress = Compress(app)
 csrf = CSRFProtect(app)
 
 # initialize autodoc object for auto generating documentation for all routes
-autodoc = Autodoc(app)
+# autodoc = Autodoc(app)
 
 #########################################################################################################
 
@@ -187,7 +187,7 @@ import server.status_code
 #########################################################################################################
 
 #########################################################################################################
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/pdf_template/<string:path>')
 @login_required
 @compress.compressed()
