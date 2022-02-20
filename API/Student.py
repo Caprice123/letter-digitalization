@@ -9,6 +9,8 @@ from API.docs import Student as StudentDocs
 from API.request_parser.Student import getParser, postParser, putParser, patchParser, deleteParser
 from flask import jsonify, abort
 
+from server.error_code import InsufficientStorage
+
 nsstudent = Namespace("Student", description="handls all student database data")
 
 class StudentsAPI(Resource):
@@ -202,7 +204,11 @@ class StudentsAPI(Resource):
         # delete all student records
         records = student_deleted.records
         for record in records:
-            db.session.delete(record)
+            if record.status not in ["rejected", "accepted"]:
+                db.session.rollback()
+                abort(412)
+            else:
+                db.session.delete(record)
             
         # deleting the student
         db.session.delete(student_deleted)

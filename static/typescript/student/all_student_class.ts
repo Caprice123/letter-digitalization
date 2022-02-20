@@ -178,35 +178,68 @@ class AddRecordForm{
             (button: button) => button.addEventListener("click", e=>{
                 // assign the category id of the record
                 this.idInput.value = button.dataset.categoryid
-                var columns = this.categories.filter(category => category.category_id == button.dataset.categoryid)
-                columns = columns[0].columns
+                var category = this.categories.filter(category => category.category_id == button.dataset.categoryid)
+                fetch(`admin/${category[0].path_format}`)
+                .then(res => res.text())
+                .then( (content: str) => {
+                    console.log(content)
+                    content = (content.match(/<div class="content">([\S\s]*?)<\/div>/) as any)[1]
+                    content = content.replaceAll("|safe", "")
+                    console.log(content)
 
-                // if no need column that is needed to be submitted then
-                // auto submit the form
-                if (columns.length == 0){
-                    this.submitFormButton.click()
-                    return
-                }
-
-                // make the form based on the category column needed to be inserted
-                columns.forEach(
-                    (column: str) => {
-                        let new_input: str = 
-                        `
-                            <tr>
-                                <td>${column}</td>
-                                <td>
-                                    <input type="text" name=${column.replace(/\s/g, "_")} style="resize: vertical;"required>
-                                </td>
-                            </tr>
-                        `
-                        this.inputContainer.insertAdjacentHTML("beforeend", new_input)
+                    content = (content.match(/{{data.(.*?)}}/g) as any)
+                    console.log(content)
+                    if (content){
+                        content = content.map(text => {
+                            text = text.replaceAll("{{data.","")
+                            text = text.replaceAll("}}", "")
+                            text = text.replaceAll("_", " ")
+                            return text
+                        })
+                        var alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "major", "subject"]
+                        content = content.filter(text => !alr_have_column.includes(text) )
+                        
+                        var columns = new Set(content)
+                        console.log(columns.size)
+                        // if no need column that is needed to be submitted then
+                        // auto submit the form
+                        if(columns){
+                            if (columns.size == 0){
+                                this.submitFormButton.click()
+                                return
+                            }
+                        }
+                        else{
+                            this.submitFormButton.click()
+                            return
+                        }
+                        // make the form based on the category column needed to be inserted
+                        columns.forEach(
+                            (column: str) => {
+                                let new_input: str = 
+                                `
+                                    <tr>
+                                        <td>${column}</td>
+                                        <td>
+                                            <input type="text" name=${column.replace(/\s/g, "_")} style="resize: vertical;"required>
+                                        </td>
+                                    </tr>
+                                `
+                                this.inputContainer.insertAdjacentHTML("beforeend", new_input)
+                            }
+                        )
+                        // slide to the input form that will be needed to be filled
+                        this.popup.classList.add("buttonselected")
+                        this.containerPopupPage.classList.remove("hidden")
                     }
-                )
+                    
+                    
+                    
+
+                    
                 
-                // slide to the input form that will be needed to be filled
-                this.popup.classList.add("buttonselected")
-                this.containerPopupPage.classList.remove("hidden")
+                
+                })
             })
         )
     }

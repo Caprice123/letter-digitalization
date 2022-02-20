@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
 from Models.Admin import Admins
 from Models.UserRole import UserRole
-from server import db, token_required, app, compress, limiter
+from server import db, token_required, app, compress
 from API import api
 from API.marshal_fields.Admin import admin_fields
 from API.docs import Admin as AdminDocs
@@ -70,7 +70,7 @@ class AdminAPI(Resource):
         # filtering all admin based on name
         if args.get("name"):
             all_admin = all_admin.filter(Admins.name == args['name'])
-            
+        
         # making pages
         if page:
             all_admin = all_admin.paginate(page, app.config["DATA_PER_PAGE"], False)

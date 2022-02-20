@@ -1,9 +1,12 @@
+
 from typing import Any, List, Tuple
 from werkzeug.datastructures import ImmutableDict
+from Handler.Admin import AdminAdminHandler
 from Interface.Category import CategoryInterface
 from Interface.Record import RecordInterface
 from Interface.Student import StudentInterface
 from Interface.Teacher import TeacherInterface
+from Interface.Admin import AdminInterface
 from flask import render_template, abort
 from datetime import datetime
 import os
@@ -12,6 +15,8 @@ from server import pdfkit_config, mail, app, brcypt
 from flask_mail import Message
 from Models.UserRole import UserRole
 import re
+
+from server.error_code import InsufficientStorage
  
 #########################################################################################################
 class StudentHandler:
@@ -23,6 +28,9 @@ class StudentHandler:
     option : dict
         a option for making pdf from html
         
+    admin_interface : AdminInterface
+        a interface for getting admin data if recipients email not found
+        
     student_interface : StudentInterface
         a interface for getting student data
         
@@ -31,6 +39,9 @@ class StudentHandler:
         
     teacher_interface : TeacherInterface
         a interface for getting teacher data
+        
+    status : int
+        indication whether the recipients of the email exists
         
     
     METHODS (PUBLIC)
@@ -87,10 +98,12 @@ class StudentHandler:
         }
         self.__student_interface = StudentInterface(token)
         self.__category_interface = CategoryInterface(token)
+        self.__admin_interface = AdminInterface(token)
         self.__record_interface = RecordInterface(token)
         self.__teacher_interface = TeacherInterface(token)
         self.__user = self.student_interface.get(user_id = id)
         self.__user = self.__user['students'][0]
+        self.__status = 0
         
     #########################################################################################################
     # PUBLIC METHOD
@@ -149,6 +162,7 @@ class StudentHandler:
         jurusan = user['jurusan']
         
         # getting the category data based on category id
+        print(form)
         category = self.category_interface.get(category_id=form['category_id'])
         category = category['categories'][0]
         
@@ -301,8 +315,15 @@ class StudentHandler:
                                                signed_filename)
         
         # generating pdf
-        pdf_without_signed = self.__create_pdf(rendered_without_signed, file_path_without_signed)
-        pdf_with_signed = self.__create_pdf(rendered_with_signed, file_path_with_signed)
+        try:
+            pdf_without_signed = self.__create_pdf(rendered_without_signed, file_path_without_signed)
+        except:
+            raise InsufficientStorage()
+            
+        try:
+            pdf_with_signed = self.__create_pdf(rendered_with_signed, file_path_with_signed)
+        except:
+            raise InsufficientStorage()
         return (file_path_without_signed, file_path_with_signed)
     
     def __filter_form(self, form: ImmutableDict, *excludes) -> dict:
@@ -392,12 +413,16 @@ class StudentHandler:
         record_id = record['record_id']
         
         # preparing the email
-        msg = Message(f"{title.replace(' ', '_')}_{student_nim}",
+        msg = Message(f"{title}_{student_nim}",
                       sender=app.config['MAIL_USERNAME'],
-                      recipients=[],
-                      cc=[])
-        msg.body = f"""{student_name},\n{student_nim},\nPermohonan {title}"""
+                      recipients=recipients,
+                      cc=cc)
         
+        # recipients email detected
+        if self.status == 1:
+            msg.body = f"""{student_name},\n{student_nim},\nPermohonan {title}"""
+        else:
+            msg.body = f"Missing account email for teacher with role {record['required_role_accept'][0]} for major {record['jurusan']}.\nPlease make the account with major if the teacher only responsible in one major else leave the major form blank."
         
         
         print("CC -> ", cc)
@@ -405,9 +430,12 @@ class StudentHandler:
         print("File -> ", path)
         print("Message -> ", msg.body)
         
-        # attaching file pdf to the email
-        with app.open_resource(path) as fp:
-            msg.attach(f"{title}_{student_nim}_{record_id}.pdf", "application/pdf", fp.read())
+        # recipients email detected then attach filte
+        if self.status == 1:
+            # attaching file pdf to the email
+            with app.open_resource(path) as fp:
+                msg.attach(f"{title}_{student_nim}_{record_id}.pdf", "application/pdf", fp.read())
+        
     
         return msg
     
@@ -427,14 +455,16 @@ class StudentHandler:
         
         cc = []
         
-        # getting all operational teacher for supervising
-        operational = self.teacher_interface.get(can_see_records=True)
-        operational = operational['teachers']
-        
-        # append the emails to the cc
-        for teacher in operational:
-            if teacher['jurusan'] == "" or teacher['jurusan'] == self.user['jurusan']:
-                cc.append(teacher['email'])
+        # recipients email detected then add cc
+        if self.status == 1:
+            # getting all operational teacher for supervising
+            operational = self.teacher_interface.get(can_see_records=True)
+            operational = operational['teachers']
+            
+            # append the emails to the cc
+            for teacher in operational:
+                if teacher['jurusan'] == "" or teacher['jurusan'] == self.user['jurusan']:
+                    cc.append(teacher['email'])
         
         return cc
     
@@ -463,9 +493,18 @@ class StudentHandler:
             next_email = self.teacher_interface.get(role=record['required_role_accept'][0])
             next_email = next_email['teachers']
             
-        # append the emails to the recipients    
-        for teacher in next_email:
-            recipients.append(teacher['email'])
+        
+        # append the emails to the recipients if recipients email detected   
+        # else alert the admin
+        if next_email:
+            for teacher in next_email:
+                recipients.append(teacher['email'])
+            self.status = 1
+        else:
+            next_email = self.admin_interface.get()['admins']
+            for admin in next_email:
+                recipients.append(admin['email'])
+            self.status = 0
         
         
         return recipients
@@ -481,6 +520,15 @@ class StudentHandler:
     @student_interface.getter
     def student_interface(self):
         return self.__student_interface
+    
+    @property
+    def admin_interface(self):
+        return self.__admin_interface
+    
+    
+    @admin_interface.getter
+    def admin_interface(self):
+        return self.__admin_interface
     
     @property
     def category_interface(self):
@@ -514,6 +562,18 @@ class StudentHandler:
     @user.getter
     def user(self):
         return self.__user
+    
+    @property
+    def status(self):
+        return self.__status
+    
+    @status.getter
+    def status(self):
+        return self.__status
+    
+    @status.setter
+    def status(self, status):
+        self.__status = status
     #########################################################################################################
 #########################################################################################################
 

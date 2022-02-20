@@ -114,8 +114,12 @@ var RecordTable = /** @class */ (function () {
                 // if the current teacher already pass the current step of acceptance or rejectance then
                 // show it in green color 
                 else if (+progress > index) {
-                    new_row =
+                    var url = window.location.pathname.split("/")[2]
+                    if (url != "sent"){
+                        new_row =
                         "\n                            <tr class=\"accepted\">\n                                <td>".concat(d.record_id, "</td>\n                                <td>").concat(d.title, "</td>\n                                <td>").concat(d.has_record.name, "</td>\n                                <td>").concat(d.has_record.nim, "</td>\n                                <td>").concat(d.date_sent, "</td>\n                                <td></td>\n                            </tr>\n                            ");
+               
+                    }
                 }
                 // if the current role not in required role accept means that the teacher can see all records then
                 // make it light mode without accept or reject button

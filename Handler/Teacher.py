@@ -1,9 +1,9 @@
 from typing import List, Tuple
 from werkzeug.datastructures import ImmutableDict
+from Interface.Admin import AdminInterface
 from Interface.Record import RecordInterface
 from Interface.Student import StudentInterface
 from Interface.Teacher import TeacherInterface
-from Models.Teacher import Teachers
 from Models.UserRole import UserRole
 from flask_mail import Message
 from server import app, mail, brcypt
@@ -79,7 +79,9 @@ class TeacherHandler:
         self.__record_interface = RecordInterface(token)
         self.__teacher_interface = TeacherInterface(token)
         self.__student_interface = StudentInterface(token)
+        self.__admin_interface = AdminInterface(token)
         self.__user = self.__get_teacher(id)
+        self.__status = 0
         
     #########################################################################################################
     # PUBLIC METHOD
@@ -186,10 +188,17 @@ class TeacherHandler:
             cc = list(filter(lambda email: email not in recipients, cc))
             
             # constructing the email
-            msg = self.__prepare_email(form, record, cc, recipients)
+            if (self.status ):
+                msg = self.__prepare_email(form, record, cc, recipients)
+            else:
+                msg, msg2 = self.__prepare_email(form, record, cc, recipients)
             
             # sending the email
-            # mail.send(msg)
+            # if self.status:
+            #     mail.send(msg)
+            # else:
+            #     mail.send(msg)
+            #     mail.send(msg2)
             
             # move the file if status record already fully accepted or remove the files if the status record already rejected
             self.__process_file(form, record)
@@ -286,7 +295,7 @@ class TeacherHandler:
             self.__delete_pdf(file_path)
             self.__delete_pdf(signed_file_path)
             
-    def __prepare_email(self, form : ImmutableDict, record : dict, cc : List[str], recipients: List[str]) -> Message:
+    def __prepare_email(self, form : ImmutableDict, record : dict, cc : List[str], recipients: List[str]) -> Message or Tuple[Message, Message]:
         """
         Preparing email that will be sent to the next step
         
@@ -309,6 +318,9 @@ class TeacherHandler:
         -----------
         msg
             Message object for the email
+            
+        msg2 
+            Message object because cannot find the email
         """
         # parsing data
         title = form['title'].replace(' ', '_')
@@ -316,6 +328,11 @@ class TeacherHandler:
         student_nim = record['has_record']['nim']
         record_status = record['status']
         record_id = record['record_id']
+        
+        destinations = record['required_role_accept']
+        role_now = self.user['role']
+        
+        
                 
         # preparing filename
         filename = f"{title}_{student_nim}_{record_id}.pdf"
@@ -336,15 +353,29 @@ class TeacherHandler:
             # update the file that will be sent
             file_will_be_sent = signed_file_path
             
+        # if status is 1 then recipients contain the next email and cc contains the student and operational
+        # else recipients contain the admins and cc contains the student and operational
                 
         # preparing the email
+       
         msg = Message(f"{form['title']} {form['response']}",
-                      sender=app.config['MAIL_USERNAME'],
-                      recipients=recipients, 
-                      cc = cc)
+                    sender=app.config['MAIL_USERNAME'],
+                    recipients=recipients, 
+                    cc = cc)
         
-        msg.body = "Surat Diterima" if form_response == "accepted" else "Surat Ditolak"
+        if self.status == 0:
+            msg.recipients = []
+            msg2 = Message("Missing account email",
+                            sender=app.config['MAIL_USERNAME'],
+                            recipients=recipients, 
+                            cc = [])
+            next_destination = destinations.index(role_now)
+            next_destination = destinations[next_destination + 1]
+            msg2.body = f"Missing account email for teacher with role {next_destination} for major {record['jurusan']}.\nPlease make the account with major if the teacher only responsible in one major else leave the major form blank."
+            print("missing email")
             
+        msg.body = "Surat Diterima" if form_response == "accepted" else "Surat Ditolak"
+
         print("CC -> ", cc)
         print("Recipients -> ", recipients)
         print("File -> ", file_will_be_sent)
@@ -354,7 +385,8 @@ class TeacherHandler:
         with app.open_resource(file_will_be_sent) as fp:
             msg.attach(f"{title}_{student_nim}_{record_id}.pdf", "application/pdf", fp.read())
             
-        return msg
+            
+        return msg if self.status else (msg, msg2)
     
     def __delete_pdf(self, path: str) -> None:
         """
@@ -417,12 +449,21 @@ class TeacherHandler:
                 else:
                     next_user = next_user
                 
-                # append the emails to the recipients  
-                for teacher in next_user:
-                    recipients.append(teacher['email'])
+                # append the emails to the recipients if recipients email detected   
+                # else alert the admin
+                if next_user:
+                    for teacher in next_user:
+                        recipients.append(teacher['email'])
+                    self.status = 1
+                    
+                else:
+                    next_email = self.admin_interface.get()['admins']
+                    for admin in next_email:
+                        recipients.append(admin['email'])
+                    self.status = 0
                 
             except IndexError:
-                pass
+                self.status = 1
             
         # if teacher response is rejected
         elif response == "rejected":
@@ -452,17 +493,18 @@ class TeacherHandler:
         """
         cc = []
         
+        
         # if the teacher response if accepted
         student = self.student_interface.get(user_id = student_id)['students'][0]
         if response == "accepted":
             # append the student email to cc
             cc.append(student['email'])
         
-        # get all email of teacher with role operational
-        operational = self.teacher_interface.get(can_see_records=True)
-        operational = operational['teachers']
+        # get all email of teacher with ability can see all records
+        can_see_records = self.teacher_interface.get(can_see_records=True)
+        can_see_records = can_see_records['teachers']
         
-        for teacher in operational:
+        for teacher in can_see_records:
             if teacher['jurusan'] == "" or teacher['jurusan'] == student['jurusan']:
                 cc.append(teacher['email'])
             
@@ -526,6 +568,16 @@ class TeacherHandler:
     @record_interface.getter
     def record_interface(self):
         return self.__record_interface
+    
+    @property
+    def admin_interface(self):
+        return self.__admin_interface
+    
+    
+    @admin_interface.getter
+    def admin_interface(self):
+        return self.__admin_interface
+    
     @property
     def user(self):
         return self.__user
@@ -533,4 +585,16 @@ class TeacherHandler:
     @user.getter
     def user(self):
         return self.__user
+    
+    @property
+    def status(self):
+        return self.__status
+    
+    @status.getter
+    def status(self):
+        return self.__status
+    
+    @status.setter
+    def status(self, status):
+        self.__status = status
     #########################################################################################################

@@ -209,17 +209,20 @@ class RecordTable{
                         // if the current teacher already pass the current step of acceptance or rejectance then
                         // show it in green color 
                         else if (+progress > index){
-                            new_row =
-                            `
-                            <tr class="accepted">
-                                <td>${d.record_id}</td>
-                                <td>${d.title}</td>
-                                <td>${d.has_record.name}</td>
-                                <td>${d.has_record.nim}</td>
-                                <td>${d.date_sent}</td>
-                                <td></td>
-                            </tr>
-                            `
+                            var url = window.location.pathname.split("/")[2]
+                            if (url != "sent"){
+                                new_row =
+                                `
+                                <tr class="accepted">
+                                    <td>${d.record_id}</td>
+                                    <td>${d.title}</td>
+                                    <td>${d.has_record.name}</td>
+                                    <td>${d.has_record.nim}</td>
+                                    <td>${d.date_sent}</td>
+                                    <td></td>
+                                </tr>
+                                `
+                            }
                         }
                         // if the current role not in required role accept means that the teacher can see all records then
                         // make it light mode without accept or reject button

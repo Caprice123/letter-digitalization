@@ -1,3 +1,4 @@
+from unicodedata import category
 from flask_restx import Resource, Namespace
 from sqlalchemy.exc import IntegrityError
 from Models.Teacher import Teachers
@@ -132,6 +133,14 @@ class TeacherAPI(Resource):
             db.session.add(new_teacher)
             db.session.commit()
             
+            # update visible role category if teacher can see all records
+            if new_teacher.can_see_records:
+                categories = Category.query.filter(~Category.visible_role.contains(args['role']))
+                categories.update({
+                                Category.visible_role : func.concat(Category.visible_role, f",{new_teacher.role}")
+                            }, synchronize_session = False)
+                db.session.commit()
+            
         # abort to 409 (Resource Conflict) because the value of a column is unique
         except IntegrityError:
             db.session.rollback()
@@ -179,12 +188,35 @@ class TeacherAPI(Resource):
             # try to update the teacher
             teacher = Teachers.query.filter_by(user_id=user.id).first_or_404()
             teacher.name = args['name']
-            teacher.role = args['role']
+            
+            # check if the role is the same
+            if teacher.role != args['role']:
+                category = Category.query.filter(Category.required_role_accept == teacher.role).all()
+                # if there is category only need its role to accept abort 412
+                if (category):
+                    db.session.rollback()
+                    abort(412)
+                    
+                # if no category then search for other teacher with the same role
+                else:
+                    other_teacher = Teachers.query.filter(Teachers.role == teacher.role)\
+                                            .filter(Teachers.user_id != user.id).all()
+                                            
+                    # if there is no other teacher then remove the role from visible role and required role accept
+                    if len(other_teacher) == 0:
+                        category_updated = Category.query.filter(Category.visible_role.contains(teacher.role))
+                        category_updated.update({
+                            Category.visible_role : func.regexp_replace(Category.visible_role, f"(,{teacher.role}|{teacher.role},)", ""),
+                            Category.required_role_accept : func.regexp_replace(Category.required_role_accept, f"(,{teacher.role}|{teacher.role},)", "")
+                        }, synchronize_session = False)
+                        
+                teacher.role = args['role']
+                            
             teacher.jurusan = args['jurusan']
             teacher.can_see_records = args['can_see_records']
+            
             # if teacher can see records is false, remove all category record visible role the teacher role 
             # if category record viisble role contain teacher role and required role accept not contain teacher role
-            
             if teacher.can_see_records == False:
                 # MYSQL command
                 updated_rows = Category.query\
@@ -241,6 +273,7 @@ class TeacherAPI(Resource):
         args = deleteParser.parse_args()
         args = {k : v for k, v in args.items() if v is not None}
         
+        
         # query the user that will be deleted and delete it
         user_deleted = UserRole.query.filter_by(id=args['user_id']).first_or_404()
         db.session.delete(user_deleted)
@@ -248,7 +281,26 @@ class TeacherAPI(Resource):
         # query the teacher that will be deleted and delete it
         teacher_deleted = Teachers.query.filter_by(user_id = user_deleted.id).first_or_404()
         db.session.delete(teacher_deleted)
-        db.session.commit()
+        
+        category_updated = Category.query.filter(Category.required_role_accept == teacher_deleted.role).all()
+        # if there is category only need its role to accept abort 412
+        if (category_updated):
+            db.session.rollback()
+            abort(412, description="Conflict with Required Role Accept in Category")
+            
+        # if no category then search for other teacher with the same role
+        else:
+            other_teacher = Teachers.query.filter(Teachers.role == teacher_deleted.role)\
+                                            .filter(Teachers.user_id != user_deleted.id).all()
+                                            
+            # if there is no other teacher then remove the role from visible role and required role accept       
+            if len(other_teacher) == 0:
+                category_updated = Category.query.filter(Category.visible_role.contains(teacher_deleted.role))
+                category_updated.update({
+                    Category.visible_role : func.regexp_replace(Category.visible_role, f"(,{teacher_deleted.role}|{teacher_deleted.role},)", ""),
+                    Category.required_role_accept : func.regexp_replace(Category.required_role_accept, f"(,{teacher_deleted.role}|{teacher_deleted.role},)", "")
+                }, synchronize_session = False)
+            db.session.commit()
         return teacher_deleted
     #########################################################################################################
 

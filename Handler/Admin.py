@@ -12,6 +12,7 @@ import re
 import codecs
 import os
 from Models.UserRole import UserRole
+from server.error_code import InsufficientStorage
 
 #########################################################################################################
 class AdminHandler():
@@ -444,14 +445,13 @@ class AdminCategoryHandler(AdminHandler):
         form = self._filter_form(form)
         
         # preparing category property based on form data
-        category_name, path_format, visible_role, required_role_accept, columns, contents = self.__prepare_category(form)
+        category_name, path_format, visible_role, required_role_accept, contents = self.__prepare_category(form)
         
         # creating new category using REST API (POST)
         new_category = self.category_interface.create(category_name=category_name,
                                                       path_format=path_format,
                                                       visible_role=visible_role,
-                                                      required_role_accept=required_role_accept,
-                                                      columns = columns)
+                                                      required_role_accept=required_role_accept)
         
         # creating history 
         description = [f"creating new category {new_category['category_id']}"]
@@ -477,9 +477,12 @@ class AdminCategoryHandler(AdminHandler):
         with app.app_context():
             # creating new template 
             new_template = render_template("pdf_template/template.html", contents = contents)
-            
-            with codecs.open(f"templates/pdf_template/{category_name.replace(' ', '_')}.html", 'w', encoding='utf-8') as f:
-                f.write(new_template)
+            try:
+                with codecs.open(f"templates/pdf_template/{category_name.replace(' ', '_')}.html", 'w', encoding='utf-8') as f:
+                    f.write(new_template)
+                    
+            except:
+                raise InsufficientStorage()
           
     def change_visibility_category(self, form: ImmutableDict) -> None:
         """
@@ -502,7 +505,10 @@ class AdminCategoryHandler(AdminHandler):
         category_changed = self.category_interface.delete(category_id = form['id'])
             
         # creating history 
-        description = [f"deleting category {category_changed['category_id']}"]
+        if category_changed['disabled']:
+            description = [f"deleting category {category_changed['category_name']}"]
+        else:
+            description = [f"enabling category {category_changed['category_name']}"]
         self._create_history(*description)
        
     def edit_category(self, form: ImmutableDict) -> str:
@@ -525,7 +531,7 @@ class AdminCategoryHandler(AdminHandler):
         form = self._filter_form(form)
         
         # preparing the editted form
-        category_name, path_format, visible_role, required_role_accept, columns, contents = self.__prepare_category(form)
+        category_name, path_format, visible_role, required_role_accept, contents = self.__prepare_category(form)
         
         # getting the previous category name
         category = self.category_interface.get(category_id = form['id'])['categories']
@@ -536,8 +542,7 @@ class AdminCategoryHandler(AdminHandler):
                                                           category_name = category_name,
                                                           path_format = path_format,
                                                           visible_role = visible_role,
-                                                          required_role_accept = required_role_accept,
-                                                          columns = columns)
+                                                          required_role_accept = required_role_accept)
         
         # removing the old template
         if os.path.exists(f"templates/{category['path_format']}"):
@@ -551,7 +556,7 @@ class AdminCategoryHandler(AdminHandler):
     
     #########################################################################################################
     # PRIVATE METHOD
-    def __prepare_category(self, form: dict) -> Tuple[str, str, str, str, list, str]:
+    def __prepare_category(self, form: dict) -> Tuple[str, str, str, str, str]:
         """
         Preparing category data
         
@@ -574,8 +579,6 @@ class AdminCategoryHandler(AdminHandler):
         required_role_accept : str
             the role that is needed to give response of the record
             
-        columns : list
-            all columns that will be needed to be filled by the user
             
         contents : str
             the content of the category
@@ -598,14 +601,13 @@ class AdminCategoryHandler(AdminHandler):
         urutan_accepted = [teacher.strip() for teacher in urutan_accepted if teacher not in can_see_records]
         visible_role = can_see_records
         visible_role.extend(urutan_accepted)
+        visible_role = set(visible_role)
         visible_role = ",".join(visible_role)
-        print(visible_role)
 
         # the required role accept
         required_role_accept = form['urutan_accepted']
         
-        # getting all columns needed to be filled by the user
-        columns = self.__get_columns(contents)
+        
         
         # parsing the path where the category will be stored
         category_name = form['categoryname']
@@ -614,7 +616,7 @@ class AdminCategoryHandler(AdminHandler):
         category_name = " ".join(category_name)
         path_format = f"pdf_template/{form['categoryname'].replace(' ', '_')}.html"
         
-        return (category_name, path_format, visible_role, required_role_accept, columns, contents)
+        return (category_name, path_format, visible_role, required_role_accept, contents)
          
     def __filter_content(self, contents: str) -> str:
         """
@@ -640,33 +642,6 @@ class AdminCategoryHandler(AdminHandler):
         contents = re.sub(r"(\t)+","<span>", contents)
         return contents
     
-    def __get_columns(self, contents: str) -> list:
-        """
-        Extracting all columns that will be needed to fill for the records
-        
-        Parameters
-        -----------
-        contents : str
-            category content that will be generated
-        
-        Return
-        -----------
-        columns
-            columns that will be needed to fill for the records
-        """
-        columns = []
-        
-        # specify no need column
-        alr_have_column = ["no", "date", "month", "year", "bulan terbit", "name", "nim", "jurusan", "subject"]
-        
-        # parsing all column needed to be filled so that it will be saved
-        for content in contents:
-            for column in re.findall('{{data.(.*?)}}', content):
-                if column.replace("_", " ").replace("|safe", "").strip().lower() not in alr_have_column \
-                    and column.replace("_", " ").replace("|safe", "").strip().lower() not in columns:
-                    columns.append(column.replace("_", " ").replace("|safe", "").strip().lower())
-        
-        return columns
     #########################################################################################################
         
     #########################################################################################################

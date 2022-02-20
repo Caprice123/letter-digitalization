@@ -144,6 +144,7 @@ class AdminAdmin extends Admin{
                         <tr>
                             <td>${data.category_id}</td>
                             <td>${data.category_name}</td>
+                            <td>${data.required_role_accept}</td>
                             <td>
                                 <div class="response">
                                     <button class="edit" data-id="${data.category_id}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
@@ -160,9 +161,9 @@ class AdminAdmin extends Admin{
                         <tr style="text-decoration:line-through;">
                             <td>${data.category_id}</td>
                             <td>${data.category_name}</td>
+                            <td>${data.required_role_accept}</td>
                             <td>
                                 <div class="response">
-                                    <button class="edit" data-id="${data.category_id}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                     <button class="delete" data-id="${data.category_id}"> <i class="fa fa-refresh" aria-hidden="true"></i></button>
                                 </div> 
                             </td>
@@ -588,9 +589,10 @@ class EditCategroryForm extends EditForm{
          */
         // filter only the content of the letter
         content = (content.match(/<div class="content">([\S\s]*?)<\/div>/) as any)[1]
-        
+        console.log(content)
         // remove the <p>, <span>, data. and <br>
-        content = content.replaceAll(/<p>|<\/p>|<\/span>|data.|<br>|\|safe/g, "")
+        content = content.replaceAll(/<p>|<\/p>|<\/span>|<br>|\|safe/g, "")
+        content = content.replaceAll("data.", "")
         
         // convert <span> to tab
         content = content.replaceAll("<span>", "\t")
@@ -657,6 +659,7 @@ const theadColumns =
 <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Required Accept</th>
     <th>Actions</th>
 </tr>
 `
