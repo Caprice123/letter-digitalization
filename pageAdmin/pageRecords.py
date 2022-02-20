@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import current_user, login_required
 from Handler.Admin import AdminRecordHandler
 
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/records', methods=["GET"])
 @login_required
 @role_required("Admin")

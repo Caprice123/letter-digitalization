@@ -1,16 +1,15 @@
 from flask import render_template, request, url_for, redirect, flash
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import login_required, current_user, logout_user
 from threading import Thread
 import time
 from Handler.Student import StudentHandler
 
-@autodoc.doc(groups='student')
+# @autodoc.doc(groups='student')
 @app.route('/student')
 @login_required
 @role_required("Student")
 @check_token
-
 def student_page(token):
     """ This is endpoint for rendering student.html and showing all records sent by his / her id """
    
@@ -28,7 +27,7 @@ def student_page(token):
     return render_template("Student_page/student.html", name = user['name'], records = records, categories = categories)
 
 
-@autodoc.doc(groups='student')
+# @autodoc.doc(groups='student')
 @app.route('/student/add-record', methods=["POST"])
 @login_required
 @role_required("Student")
@@ -53,7 +52,7 @@ def student_create_record(token):
     flash("You have successfully made a record", "Success")
     return redirect(url_for('student_page', page = 1))
 
-@autodoc.doc(groups='student')
+# @autodoc.doc(groups='student')
 @app.route('/student/change-password')
 @login_required
 @role_required("Student")
@@ -63,7 +62,7 @@ def student_change_password(token):
     
     return render_template("change_password.html", user_role = "Student")
    
-@autodoc.doc(groups='student')
+# @autodoc.doc(groups='student')
 @app.route('/student/update-password', methods=["POST"])
 @login_required
 @role_required("Student")

@@ -182,7 +182,7 @@ import pageLogin
 import pageStudent
 import pageTeacher
 import pageHelpGuide
-import pageDocumentation
+# import pageDocumentation
 import server.status_code
 #########################################################################################################
 

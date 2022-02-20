@@ -1,10 +1,9 @@
-from enum import auto
 from flask import render_template, request, redirect, url_for, flash
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import current_user, login_required
 from Handler.Admin import AdminAdminHandler
     
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/admin')
 @login_required
 @role_required("Admin")
@@ -25,7 +24,7 @@ def admin_user_admin_page(token):
     all_admins, user = admin_handler.get_admin_page(page)
     return render_template("Admin_page/admin.html", datas = all_admins, destination="admin", name=user['name'])
     
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/admin/create', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -46,7 +45,7 @@ def admin_user_add_admin(token):
     return redirect(url_for('admin_user_admin_page', page = 1))
 
 
-@autodoc.doc(groups='admin')   
+# @autodoc.doc(groups='admin')   
 @app.route('/admin/user/admin/delete', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -66,7 +65,7 @@ def admin_user_delete_admin_page(token):
     flash("You have successfully deleted admin", "Success")
     return redirect(url_for("admin_user_admin_page", page = 1))
 
-@autodoc.doc(groups='admin') 
+# @autodoc.doc(groups='admin') 
 @app.route('/admin/user/admin/edit', methods=["POST"])
 @login_required
 @role_required("Admin")

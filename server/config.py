@@ -22,6 +22,7 @@ class Config:
     MAIL_PORT = 587
     MAIL_USERNAME = os.getenv("MAIL_USERNAME", "kelvin.cendra001@binus.ac.id")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+    # app/.heroku/python/lib/python3.9/site-packages/flask_autodoc
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
     MAIL_DEBUG = False

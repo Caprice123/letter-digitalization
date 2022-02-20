@@ -1,11 +1,11 @@
 from flask import render_template, request, redirect, url_for, flash, abort
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import login_required, current_user, logout_user
 import time
 from threading import Thread
 from Handler.Teacher import TeacherHandler
 
-@autodoc.doc(groups='teacher')
+# @autodoc.doc(groups='teacher')
 @app.route('/teacher/<string:status>')
 @login_required
 @role_required("Teacher")
@@ -32,7 +32,7 @@ def teacher_page(token, status):
     return render_template("Teacher_page/teacher.html", teacher=teacher, records = records, name=teacher['name'], status = status)
 
 
-@autodoc.doc(groups='teacher')
+# @autodoc.doc(groups='teacher')
 @app.route('/teacher/update-record', methods=["POST"])
 @login_required
 @role_required("Teacher")
@@ -59,7 +59,7 @@ def teacher_update_record(token):
     flash("You have successfully updated the record", "Success")
     return redirect(url_for('teacher_page', status="sent", page = 1))
 
-@autodoc.doc('teacher')
+# @autodoc.doc('teacher')
 @app.route('/teacher/change-password')
 @login_required
 @role_required("Teacher")
@@ -68,7 +68,7 @@ def teacher_change_password(token):
     """ This is endpoint for rendering change_password.html """
     return render_template("change_password.html", user_role = "Teacher")
     
-@autodoc.doc(groups='teacher')
+# @autodoc.doc(groups='teacher')
 @app.route('/teacher/update-password', methods=["POST"])
 @login_required
 @role_required("Teacher")

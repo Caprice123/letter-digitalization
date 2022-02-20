@@ -1,9 +1,9 @@
-from server import app, role_required, check_token, autodoc
+from server import app, role_required, check_token
 from flask import request, render_template, redirect, url_for, flash
 from Handler.Admin import AdminHandler
 from flask_login import current_user, logout_user, login_required
 
-@autodoc.doc('admin')
+# @autodoc.doc('admin')
 @app.route('/admin/change-password')
 @login_required
 @role_required("Admin")
@@ -12,7 +12,7 @@ def admin_change_password(token):
     """ This is endpoint for rendering change_password.html """
     return render_template("change_password.html", user_role = "Admin")
     
-@autodoc.doc('admin')
+# @autodoc.doc('admin')
 @app.route('/admin/update-password', methods=["POST"])
 @login_required
 @role_required("Admin")

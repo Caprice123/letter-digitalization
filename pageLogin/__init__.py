@@ -1,17 +1,17 @@
 from flask import render_template, request, url_for, redirect, flash
 from Handler.Login import LoginHandler
-from server import app, db, ts, autodoc
+from server import app, db, ts
 from Models.UserRole import UserRole
 from threading import Thread
 from Models.Teacher import Teachers
 
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route('/')
 def index():
     """ This is endpoint for home page and will be redirect to login page """
     return redirect(url_for('login_page'))
 
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route("/login", methods=["GET", "POST"])
 def login_page():
     """ This is endpoint for login page """
@@ -34,7 +34,7 @@ def login_page():
         
         return response
     
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route("/logout")
 def logout_page():
     """ This is endpoint for logoutting user """
@@ -71,7 +71,7 @@ def confirm_token(token: str, expiration: int=3600) -> int:
         return False
     return id       
 
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route('/confirm/<string:token>')
 def confirm_email(token):
     """ This is endpoint for rendering reset password page """
@@ -90,7 +90,7 @@ def confirm_email(token):
         flash("Expired Token", "Error")
         return redirect(url_for('login_page'))
 
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route('/sign-up', methods=["POST"])
 def signUp():
     """ This is endpoint for registering new student account """
@@ -100,7 +100,7 @@ def signUp():
     return response
 
 
-@autodoc.doc(groups='login')
+# @autodoc.doc(groups='login')
 @app.route('/forgot-password', methods=["POST"])
 def forgot_password():
     """ This is endpoint for generating the token and sending email to user for resetting password """
@@ -130,7 +130,7 @@ def forgot_password():
         flash("Email not registered", "Error")
         return redirect(url_for('login_page'))
     
-@autodoc.doc('login')
+# @autodoc.doc('login')
 @app.route("/reset-password", methods=["POST"])
 def reset_password():
     """ This is endpoint for resetting password """

@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for, abort, flash
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import current_user, login_required
 from Handler.Admin import AdminTeacherHandler
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/teacher')
 @login_required
 @role_required("Admin")
@@ -24,7 +24,7 @@ def admin_user_teacher_page(token):
     all_teachers, user = teacher_handler.get_admin_page(page)
     return render_template("Admin_page/teacher.html", datas = all_teachers, destination="teacher", name=user['name'])
     
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/teacher/create', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -43,7 +43,7 @@ def admin_user_add_teacher(token):
     flash("You have successfully added new teacher", "Success")
     return redirect(url_for("admin_user_teacher_page", page = 1))
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/teacher/delete', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -62,7 +62,7 @@ def admin_user_delete_teacher_page(token):
     flash("You have successfully deleted teacher", "Success")
     return redirect(url_for("admin_user_teacher_page", page = 1))
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/teacher/edit', methods=["POST"])
 @login_required
 @role_required("Admin")

@@ -1,12 +1,12 @@
 from flask import render_template, request, url_for, redirect, flash
 from Handler.Admin import AdminCategoryHandler
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 import time
 from flask_login import current_user, login_required
 from threading import Thread
 from Models.Teacher import Teachers
 
-@autodoc.doc(groups='admin') 
+# @autodoc.doc(groups='admin') 
 @app.route('/admin/category')
 @login_required
 @role_required("Admin")
@@ -31,7 +31,7 @@ def admin_category_page(token):
     return render_template("Admin_page/category.html", datas = categories, destination="category", name=user['name'], available_role = available_role)
         
         
-@autodoc.doc(groups='admin') 
+# @autodoc.doc(groups='admin') 
 @app.route('/admin/category/create', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -56,7 +56,7 @@ def admin_add_category_page(token):
     return redirect(url_for('admin_category_page', page=1))
 
 
-@autodoc.doc(groups='admin')         
+# @autodoc.doc(groups='admin')         
 @app.route("/admin/category/delete", methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -77,7 +77,7 @@ def admin_category_delete_page(token):
     return redirect(url_for('admin_category_page', page=1))
 
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route("/admin/category/edit", methods=["POST"])
 @login_required
 @role_required("Admin")

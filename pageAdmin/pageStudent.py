@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for, flash
-from server import app, check_token, role_required, autodoc
+from server import app, check_token, role_required
 from flask_login import current_user, login_required
 from Handler.Admin import AdminStudentHandler
 from Models.Teacher import Teachers
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/student')
 @login_required
 @role_required("Admin")
@@ -30,7 +30,7 @@ def admin_user_student_page(token):
     
     return render_template("Admin_page/student.html", datas = all_students, destination="student", name=user['name'], available_jurusan=available_jurusan)
         
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/student/create', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -50,7 +50,7 @@ def admin_user_add_student(token):
     return redirect(url_for('admin_user_student_page', page = 1))
     
     
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/student/delete', methods=["POST"])
 @login_required
 @role_required("Admin")
@@ -69,7 +69,7 @@ def admin_user_delete_student_page(token):
     flash("You have successfully deleted student", "Success")
     return redirect(url_for('admin_user_student_page', page = 1))
 
-@autodoc.doc(groups='admin')
+# @autodoc.doc(groups='admin')
 @app.route('/admin/user/student/edit', methods=["POST"])
 @login_required
 @role_required("Admin")
