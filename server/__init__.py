@@ -1,3 +1,4 @@
+
 from flask import Flask, redirect, abort, request, url_for, flash
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
@@ -7,14 +8,13 @@ from flask_login import LoginManager, current_user, login_required
 from flask_mail import Mail
 import pdfkit
 from flask_wtf import CSRFProtect
-from server.config import ProductionConfig
+from .config import ProductionConfig
 import jwt
 from functools import wraps
 from itsdangerous import URLSafeTimedSerializer
 from flask_compress import Compress
 # from flask_autodoc.autodoc import Autodoc
 from sqlalchemy import inspect
-
 #########################################################################################################
 # loading dotenv
 load_dotenv()

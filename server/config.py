@@ -46,7 +46,7 @@ class DevelopmentConfig(Config):
     # MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", keyring.get_password("UAS_DATABASE", MAIL_USERNAME))
     
 class ProductionConfig(Config): 
-    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")  
+    SQLALCHEMY_DATABASE_URI =  os.getenv("SQLALCHEMY_DATABASE_URI",f"mysql://root:{keyring.get_password('UAS_DATABASE', 'password_mysql')}@localhost/uas")  
     MAIL_USERNAME = os.getenv("MAIL_USERNAME", "kelvin.cendra001@binus.ac.id")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     
